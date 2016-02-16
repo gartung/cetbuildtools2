@@ -22,9 +22,39 @@ See `LICENSE`_ for details.
 
 .. _`LICENSE`: LICENSE
 
+Installing ``cetbuildtools2``
+=============================
+Prerequisites: `CMake`_ 3.0 or higher
 
-Why reStructured Text?
-======================
+Create build directory outside the ``cetbuildtools2`` source directory (i.e.
+the directory holding this README file::
+
+  $ ls
+  cetbuildtools2.git
+  $ mkdir cetbuildtools2.build
+  $ cd cetbuildtools2.build
+
+Run cmake in the build directory to configure the project, supplying a directory 
+under which the programs and files should be installed plus the path to the
+``cetbuildtools2`` source directory::
+
+  $ cmake -DCMAKE_INSTALL_PREFIX=/some/install/dir ../cetbuildtools2.git
+
+Run cmake again, passing the ``--build`` and ``--target`` arguments as
+follows to install ``cetbuildtools2`` to the location chosen above::
+
+  $ cmake --build . --target install
+
+Before installing, unit tests may be run by building the ``test`` target::
+
+  $ cmake --build . --target test
+
+Using ``cetbuildtools2``
+========================
+TODO
+
+Why reStructured Text for Documentation?
+========================================
 
 CMake modules can be documented using RST, and processed via CMake itself and/or
 `Sphinx`_ to generate command-line, manual and webpage docs. Might as well

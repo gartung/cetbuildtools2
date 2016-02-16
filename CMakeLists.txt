@@ -1,0 +1,40 @@
+# - Top level CMake script for cetbuildtools2
+#   Though a very simple project, it requires its own functionality
+#   to install natively or using the CET/UPS policy
+cmake_minimum_required(VERSION 3.0)
+project(cetbuildtools2 VERSION 0.1.0 LANGUAGES NONE)
+
+# - Install policy
+# Native only for now
+include(GNUInstallDirs)
+set(CMAKE_INSTALL_CMAKEDIR "${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake")
+
+# - Testing
+enable_testing()
+add_test(NAME sanity COMMAND ${CMAKE_COMMAND} --version)
+
+# - Install CMake files/modules
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(
+  ${PROJECT_NAME}Config.cmake.in
+  ${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+  INSTALL_DESTINATION "${CMAKE_INSTALL_CMAKEDIR}"
+  PATH_VARS CMAKE_INSTALL_CMAKEDIR
+  )
+
+write_basic_package_version_file(
+  ${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+  VERSION ${PROJECT_VERSION}
+  COMPATIBILITY SameMajorVersion
+  )
+
+install(
+  FILES
+    ${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+    ${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+  DESTINATION
+    "${CMAKE_INSTALL_CMAKEDIR}"
+  )
+
+
