@@ -22,3 +22,13 @@ See `LICENSE`_ for details.
 
 .. _`LICENSE`: LICENSE
 
+
+Why reStructured Text?
+======================
+
+CMake modules can be documented using RST, and processed via CMake itself and/or
+`Sphinx`_ to generate command-line, manual and webpage docs. Might as well
+get this in place from the start!
+
+.. _`Sphinx`: http://www.sphinx-doc.org/en/stable/
+
