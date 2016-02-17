@@ -1,7 +1,7 @@
-cetbuildtools2
-**************
+cetbuildtools2: CMake Modules for FNAL CET Projects
+***************************************************
 
-A rewrite of the `FNAL cetbuildtools`_ `CMake`_ modules to 
+A rewrite of the `FNAL cetbuildtools`_ `CMake`_ modules to
 
 1. Decouple the functionality from the `FNAL UPS`_ configuration management system
 
@@ -24,7 +24,10 @@ See `LICENSE`_ for details.
 
 Installing ``cetbuildtools2``
 =============================
-Prerequisites: `CMake`_ 3.0 or higher
+Prerequisites: 
+
+* `CMake`_ 3.0 or higher
+* *Optional:* `Sphinx`_ for building HTML and man documentation
 
 Create build directory outside the ``cetbuildtools2`` source directory (i.e.
 the directory holding this README file:
@@ -36,7 +39,7 @@ the directory holding this README file:
   $ mkdir cetbuildtools2.build
   $ cd cetbuildtools2.build
 
-Run cmake in the build directory to configure the project, supplying a directory 
+Run cmake in the build directory to configure the project, supplying a directory
 under which the programs and files should be installed plus the path to the
 ``cetbuildtools2`` source directory:
 
@@ -59,7 +62,7 @@ Before installing, unit tests may be run by building the ``test`` target:
 
 Using ``cetbuildtools2``
 ========================
-Like any other package, ``cetbuildtools2`` may be located by CMake-based projects using CMake's ``find_package`` command:  
+Like any other package, ``cetbuildtools2`` may be located by CMake-based projects using CMake's ``find_package`` command:
 
 .. code-block:: cmake
 
@@ -74,9 +77,9 @@ using:
 1. (Recommended) Use the ``CMAKE_PREFIX_PATH`` variable as a command line argument to CMake (or set as a Path-style
    variable in the environment) to point CMake to the installation prefix under which ``cetbuildtools2`` is installed. For
    example, if it was installed under ``/another/install/dir``, then the example project could be configured as::
-   
+
    $ cmake -DCMAKE_PREFIX_PATH=/another/install/dir <otherargs>
-   
+
    See also the `documentation for the find_package command`_
 
 2. (Not Recommended) Paths hardcoded or obtained from non-standard environment variable passed as arguments to ``find_package``

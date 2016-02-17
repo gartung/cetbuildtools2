@@ -9,6 +9,9 @@ project(cetbuildtools2 VERSION 0.1.0 LANGUAGES NONE)
 include(GNUInstallDirs)
 set(CMAKE_INSTALL_CMAKEDIR "${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake")
 
+# - Documentation
+add_subdirectory(documentation)
+
 # - Testing
 enable_testing()
 add_test(NAME sanity COMMAND ${CMAKE_COMMAND} --version)
