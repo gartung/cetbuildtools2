@@ -17,6 +17,12 @@ enable_testing()
 add_test(NAME sanity COMMAND ${CMAKE_COMMAND} --version)
 
 # - Install CMake files/modules
+# - Modules
+install(DIRECTORY Modules
+  DESTINATION "${CMAKE_INSTALL_CMAKEDIR}"
+  )
+
+# - find_package support
 include(CMakePackageConfigHelpers)
 
 configure_package_config_file(

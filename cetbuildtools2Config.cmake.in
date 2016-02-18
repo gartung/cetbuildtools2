@@ -4,5 +4,5 @@
 #-----------------------------------------------------------------------
 # Settings for this project
 #
-set_and_check(@PROJECT_NAME@_MODULE_PATH "@PACKAGE_CMAKE_INSTALL_CMAKEDIR@")
+set_and_check(@PROJECT_NAME@_MODULE_PATH "@PACKAGE_CMAKE_INSTALL_CMAKEDIR@/Modules")
 
