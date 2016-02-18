@@ -14,7 +14,7 @@ add_subdirectory(documentation)
 
 # - Testing
 enable_testing()
-add_test(NAME sanity COMMAND ${CMAKE_COMMAND} --version)
+add_subdirectory(testing)
 
 # - Install CMake files/modules
 # - Modules
