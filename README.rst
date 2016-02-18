@@ -47,8 +47,10 @@ under which the programs and files should be installed plus the path to the
 
   $ cmake -DCMAKE_INSTALL_PREFIX=/some/install/dir ../cetbuildtools2.git
 
-Run cmake again, passing the ``--build`` and ``--target`` arguments as
-follows to install ``cetbuildtools2`` to the location chosen above:
+To enable the build of the documentation, also pass `-DSPHINX_BUILD_HTML=ON`
+to `cmake` in the above command line. To build and install ``cetbuildtools2`` 
+to the location chosen above, run cmake again, passing  the ``--build`` and ``--target`` 
+arguments as follows:
 
 .. code-block:: console
 
