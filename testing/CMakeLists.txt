@@ -68,3 +68,14 @@ set_tests_properties(testEnumOption_CaseInsensitive
   PROPERTIES PASS_REGULAR_EXPRESSION "baz alice"
   )
 
+#-----------------------------------------------------------------------
+# CetInstallDirs tests
+add_test(
+  NAME testCetInstallDirs_Basic
+  COMMAND ${CMAKE_COMMAND}
+          -DCMAKE_MODULE_PATH=${PROJECT_SOURCE_DIR}/Modules
+          -P ${CMAKE_CURRENT_SOURCE_DIR}/testCetInstallDirs.cmake
+  )
+
+
+
