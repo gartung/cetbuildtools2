@@ -16,14 +16,14 @@ to keep as close as possible to CMake interfaces.
 .. _`FNAL UPS`: https://cdcvs.fnal.gov/redmine/projects/ups
 
 License
-=======
+-------
 ``cetbuildtools2`` is distributed under the OSI-approved BSD 3-clause License.
 See `LICENSE`_ for details.
 
 .. _`LICENSE`: LICENSE
 
 Installing ``cetbuildtools2``
-=============================
+-----------------------------
 Prerequisites: 
 
 * `CMake`_ 3.0 or higher
@@ -63,7 +63,7 @@ Before installing, unit tests may be run by building the ``test`` target:
   $ cmake --build . --target test
 
 Using ``cetbuildtools2``
-========================
+------------------------
 Like any other package, ``cetbuildtools2`` may be located by CMake-based projects using CMake's ``find_package`` command:
 
 .. code-block:: cmake
@@ -90,7 +90,7 @@ using:
 
 
 Why reStructured Text for Documentation?
-========================================
+----------------------------------------
 
 CMake modules can be documented using RST, and processed via CMake itself and/or
 `Sphinx`_ to generate command-line, manual and webpage docs. Might as well
