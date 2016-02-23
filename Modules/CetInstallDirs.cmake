@@ -67,6 +67,11 @@
 #
 #   Selection/Activation of UPS Install Policy
 #
+# Install/Build Directory Functions
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#
+# The following functions are available to query and manipulate
+# install and build output directories
 
 #-----------------------------------------------------------------------
 # Copyright 2016 Ben Morgan <Ben.Morgan@warwick.ac.uk>
@@ -80,6 +85,10 @@
 # See the License for more information.
 #-----------------------------------------------------------------------
 
+#-----------------------------------------------------------------------
+# Core includes
+#
+include(CMakeParseArguments)
 
 #-----------------------------------------------------------------------
 # GNU Install Policy - inline for now
@@ -124,3 +133,85 @@ foreach(dir CMAKEDIR FHICLDIR GDMLDIR)
   endif()
 endforeach()
 
+#[[.rst:
+.. cmake:command:: cet_set_output_directories
+
+  .. code-block:: cmake
+
+    cet_set_output_directories()
+
+  :cmake:command:`Function <cmake:command:function>` that sets the
+  values of the default output directories for CMake targets to
+  match to the install hierarchy.
+
+  For single mode build generators (make, ninja), the following
+  hierarchy is used:
+
+  .. code-block:: console
+
+    +- <PROJECT_BINARY_DIR>/
+       +- BuildProducts/
+          +- <CMAKE_INSTALL_BINDIR>/
+             +- ... "runtime" targets ...
+          +- <CMAKE_INSTALL_LIBDIR>/
+             +- ... "library" and "archive" targets ...
+
+  For multimode build generators (Xcode, Visual Studio), each mode
+  is separated using the hierarchy
+
+  .. code-block:: console
+
+    +- <PROJECT_BINARY_DIR>
+       +- BuildProducts/
+          +- <CONFIG>/
+             +- <CMAKE_INSTALL_BINDIR>/
+                +- ... "runtime" targets ...
+             +- <CMAKE_INSTALL_LIBDIR>/
+                +- ... "library" and "archive" targets ...
+          +- ...
+
+  where ``<CONFIG>`` is repeated for each build configuration listed in
+  :cmake:variable:`CMAKE_CONFIGURATION_TYPES <cmake:variable:CMAKE_CONFIGURATION_TYPES>`, e.g. Release, Debug, RelWithDebInfo etc.
+  Currently always called by inclusion of the ``CetInstallDirs``
+  module.
+
+  .. todo::
+
+    Consider taking a base directory argument and review default call
+#]]
+function(cet_set_output_directories)
+  set(CSODIRS_BASE_DIR "${PROJECT_BINARY_DIR}/BuildProducts")
+  # - Defaults for single-mode generators
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY
+    "${CSODIRS_BASE_DIR}/${CMAKE_INSTALL_BINDIR}"
+    PARENT_SCOPE
+    )
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY
+    "${CSODIRS_BASE_DIR}/${CMAKE_INSTALL_LIBDIR}"
+    PARENT_SCOPE
+    )
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY
+    "${CSODIRS_BASE_DIR}/${CMAKE_INSTALL_LIBDIR}"
+    PARENT_SCOPE
+    )
+
+  # - Multimode generator overrides
+  foreach(_conftype ${CMAKE_CONFIGURATION_TYPES})
+    string(TOUPPER ${_conftype} _conftype_uppercase)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${_conftype_uppercase}
+      "${CSODIRS_BASE_DIR}/${_conftype}/${CMAKE_INSTALL_BINDIR}"
+      PARENT_SCOPE
+      )
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${_conftype_uppercase}
+      "${CSODIRS_BASE_DIR}/${_conftype}/${CMAKE_INSTALL_LIBDIR}"
+      PARENT_SCOPE
+      )
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${_conftype_uppercase}
+      "${CSODIRS_BASE_DIR}/${_conftype}/${CMAKE_INSTALL_LIBDIR}"
+      PARENT_SCOPE
+      )
+  endif()
+endfunction()
+
+# - Default call
+cet_set_output_directories()
