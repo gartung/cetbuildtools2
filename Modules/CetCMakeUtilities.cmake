@@ -153,3 +153,95 @@ function(enum_option _var)
   endif()
 endfunction()
 
+
+#-----------------------------------------------------------------------
+# BOOST.UNIT HELPERS
+#-----------------------------------------------------------------------
+# Many places where Boost.unit is used.
+# Generally always boils down to setting a couple of target properties
+# and linking said target to the Boost.Unit library.
+# Encapsulate this in a function taking the target to be "Boost.Unitified"
+# Will need review if additional use cases/styles of use are encountered
+# TODO: Error checking
+
+# - Apply needed properties
+
+#-----------------------------------------------------------------------
+#[[.rst:
+.. cmake:command:: set_boost_unit_properties
+
+  .. code-block:: cmake
+
+    set_boost_unit_properties(<target>)
+
+  :cmake:command:`Function <cmake:command:function>` to apply compile
+  definitions, include directories and link libraries to build target
+  ``<target>`` as a Boost.Unit test. If ``<target>`` is not a valid
+  CMake target (executable or library), a FATAL_ERROR is raised.
+
+  The target properties are appended with:
+
+  - ``COMPILE_DEFINITIONS``: ``-DBOOST_TEST_DYN_LINK`` for libraries
+    and executables, with the latter also having ``-DBOOST_TEST_MAIN``
+    appended.
+
+  - ``INCLUDE_DIRECTORIES``: value of ``Boost_INCLUDE_DIRS``
+
+  - ``LINK_LIBRARIES``: value of ``Boost_UNIT_TEST_FRAMEWORK_LIBRARY``
+
+  These settings assume that Boost has been located using CMake's
+  builtin :cmake:module:`FindBoost <cmake:module:FindBoost>` module
+  before being called. If the CMake variables ``Boost_FOUND`` or
+  ``Boost_UNIT_TEST_FRAMEWORK_LIBRARY`` are not set, the function
+  raises a FATAL_ERROR. At present, no checking of Release vs Debug
+  Boost libraries is performed.
+
+  .. todo::
+
+    Review usage of imported targets in CMake 3.5's FindBoost!
+
+#]]
+function(set_boost_unit_properties _target)
+  if(NOT TARGET ${_target})
+    message(FATAL_ERROR "set_boost_unit_properties: input '${_target}' is not a valid CMake target")
+  endif()
+
+  # - ASSUMPTION - FindBoost has been used...
+  if(NOT Boost_FOUND)
+    message(FATAL_ERROR
+      "set_boost_unit_properties: Boost not found\n"
+      "Ensure the project calls\n"
+      "find_package(Boost REQUIRED unit_test_framework)\n"
+      "before using this function"
+      )
+  endif()
+  if(NOT Boost_UNIT_TEST_FRAMEWORK_LIBRARY)
+    message(FATAL_ERROR
+      "set_boost_unit_properties: No Boost_UNIT_TEST_FRAMEWORK_LIBRARY found\n"
+      "Ensure the project calls\n"
+      "find_package(Boost REQUIRED unit_test_framework)\n"
+      "before using this function"
+      )
+  endif()
+
+  # Append, don't overwrite, compile definitions.
+  # All target types need(or rather use) BOOST_TEST_DYN_LINK
+  # BOOST_TEST_MAIN for executables only
+  set_property(TARGET ${_target}
+    APPEND PROPERTY
+      COMPILE_DEFINITIONS
+        BOOST_TEST_DYN_LINK
+        $<$<STREQUAL:$<TARGET_PROPERTY:${_target},TYPE>,EXECUTABLE>:BOOST_TEST_MAIN>
+    )
+
+  # PRIVATE incs/libs for now as is assumed tests will not be installed
+  # include directories - make private for now
+  target_include_directories(${_target} PRIVATE ${Boost_INCLUDE_DIRS})
+  # libs to link - can't specify link rule here as others may use it.
+  target_link_libraries(${_target} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+endfunction()
+#-----------------------------------------------------------------------
+# END OF BOOST.UNIT HELPERS
+#-----------------------------------------------------------------------
+
+

@@ -68,6 +68,15 @@ set_tests_properties(testEnumOption_CaseInsensitive
   PROPERTIES PASS_REGULAR_EXPRESSION "baz alice"
   )
 
+# - Boost.Unit
+# TODO: Needs implementing as a mini-project(s)
+add_test(
+  NAME testBoostUnitProperties
+  COMMAND ${CMAKE_COMMAND}
+          -DCMAKE_MODULE_PATH=${PROJECT_SOURCE_DIR}/Modules
+          -P ${CMAKE_CURRENT_SOURCE_DIR}/testBoostUnitProperties.cmake
+  )
+
 #-----------------------------------------------------------------------
 # CetInstallDirs tests
 add_test(
