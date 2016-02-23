@@ -2,7 +2,7 @@
 # CetCMakeUtilities
 # -----------------
 #
-# Cetbuildtools2 utility functions and macros
+# Cetbuildtools2 utility functions and macros.
 #
 
 #-----------------------------------------------------------------------
@@ -155,18 +155,6 @@ endfunction()
 
 
 #-----------------------------------------------------------------------
-# BOOST.UNIT HELPERS
-#-----------------------------------------------------------------------
-# Many places where Boost.unit is used.
-# Generally always boils down to setting a couple of target properties
-# and linking said target to the Boost.Unit library.
-# Encapsulate this in a function taking the target to be "Boost.Unitified"
-# Will need review if additional use cases/styles of use are encountered
-# TODO: Error checking
-
-# - Apply needed properties
-
-#-----------------------------------------------------------------------
 #[[.rst:
 .. cmake:command:: set_boost_unit_properties
 
@@ -240,8 +228,54 @@ function(set_boost_unit_properties _target)
   # libs to link - can't specify link rule here as others may use it.
   target_link_libraries(${_target} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 endfunction()
-#-----------------------------------------------------------------------
-# END OF BOOST.UNIT HELPERS
-#-----------------------------------------------------------------------
 
+
+#-----------------------------------------------------------------------
+# TBB.OFFLOAD HELPERS
+#-----------------------------------------------------------------------
+# Several places where "find_tbb_offloads" occurs. This command does
+# not (apparently) appear anywhere in the cetbuildtools code, so
+# seems to be a placeholder. Nevertheless, can provide a suitable
+# wrapper to apply the additional properties needed
+# TODO: Note that the CMake Variable TBB_OFFLOAD_FLAG also needs to be
+# set... plus whatever other links... but that can all be co-located here.
+
+#[[.rst:
+.. cmake:command:: set_tbb_offload_properties
+
+  .. code-block:: cmake
+
+    set_tbb_offload_properties(<target>)
+
+  :cmake:command:`Function <cmake:command:function>` to apply properties
+  needed to compile target ``<target>`` with support for TBB offloads.
+
+  Currently unimplemented (see below) and will emit a warning when used.
+
+.. todo::
+
+  Needs ``find_tbb_offloads`` command which doesn't appear to exist
+  anywhere yet. Assumed that this scans source files for usage of
+  offload specific calls, returning true if so. The needed compile flag
+  is then added...
+#]]
+function(set_tbb_offload_properties _target)
+  if(NOT TARGET ${_target})
+    message(FATAL_ERROR "set_tbb_offload_properties: input '${_target}' is not a valid CMake target")
+  endif()
+
+  # Only apply if the find_tbb_offloads command exists...
+  if(COMMAND find_tbb_offloads)
+    get_target_property(_target_sources ${_target} SOURCES)
+    find_tbb_offloads(FOUND_VAR have_tbb_offload ${_target_sources})
+    if(have_tbb_offload)
+      set_property(TARGET ${_target}
+        APPEND PROPERTY
+          LINK_FLAGS ${TBB_OFFLOAD_FLAG}
+        )
+    endif()
+  else()
+    message(WARNING "set_tbb_offload_properties: no find_tbb_offloads command available")
+  endif()
+endfunction()
 
