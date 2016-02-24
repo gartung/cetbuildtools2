@@ -1,10 +1,10 @@
 #.rst:
-# CetCompilerConfiguration
-# ------------------------
+# CetCompilerSettings
+# -------------------
 #
 # .. code-block:: cmake
 #
-#   include(CetCompilerConfiguration)
+#   include(CetCompilerSettings)
 #
 # Sets CET Build Modes and Compiler Flags when included.
 #
