@@ -8,6 +8,7 @@
    /users/introduction
    /users/CetCMakeUtilities
    /users/CetInstallDirs
+   /users/CetCompilerConfiguration
    /users/CetWriteCXXVersionAPI
 
 .. toctree::
