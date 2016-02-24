@@ -250,7 +250,8 @@ endfunction()
   :cmake:command:`Function <cmake:command:function>` to apply properties
   needed to compile target ``<target>`` with support for TBB offloads.
 
-  Currently unimplemented (see below) and will emit a warning when used.
+  Currently unimplemented (see below) but will not emit a warning about
+  its usage.
 
 .. todo::
 
@@ -274,8 +275,8 @@ function(set_tbb_offload_properties _target)
           LINK_FLAGS ${TBB_OFFLOAD_FLAG}
         )
     endif()
-  else()
-    message(WARNING "set_tbb_offload_properties: no find_tbb_offloads command available")
+    #else()
+    #message(WARNING "set_tbb_offload_properties: no find_tbb_offloads command available")
   endif()
 endfunction()
 

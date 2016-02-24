@@ -80,7 +80,6 @@ enum_option(CET_COMPILER_DIAGNOSTIC_LEVEL
   TYPE STRING
   DEFAULT CAUTIOUS
   DOC "Set warning diagnostic level"
-  CASE_INSENSITIVE
   )
 
 # - Treat warnings as errors

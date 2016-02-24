@@ -210,7 +210,7 @@ function(cet_set_output_directories)
       "${CSODIRS_BASE_DIR}/${_conftype}/${CMAKE_INSTALL_LIBDIR}"
       PARENT_SCOPE
       )
-  endif()
+  endforeach()
 endfunction()
 
 # - Default call
