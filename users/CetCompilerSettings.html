@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CetCompilerSettings &mdash; cetbuildtools2 0.1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="cetbuildtools2 0.1.0 documentation" href="../index.html"/>
+        <link rel="next" title="CetWriteCXXVersionAPI" href="CetWriteCXXVersionAPI.html"/>
+        <link rel="prev" title="CetInstallDirs" href="CetInstallDirs.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> cetbuildtools2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Using cetbuildtools2</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to cetbuildtools2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetCMakeUtilities.html">CetCMakeUtilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetInstallDirs.html">CetInstallDirs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">CetCompilerSettings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cet-build-types-and-compiler-flags">CET Build Types and Compiler Flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options-for-controlling-compiler-warnings">Options for Controlling Compiler Warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options-for-controlling-debugging-output">Options for Controlling Debugging Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options-for-controlling-symbol-resolution">Options for Controlling Symbol Resolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-level-optimizations">Architecture Level Optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#assertion-management">Assertion Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CetWriteCXXVersionAPI.html">CetWriteCXXVersionAPI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developing cetbuildtools2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developers/cmakeguide.html">CMake Coding Conventions for cetbuildtools2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/cmakedocs.html">Documenting CMake Modules and other Constructs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">cetbuildtools2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>CetCompilerSettings</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/users/CetCompilerSettings.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cetcompilersettings">
+<h1>CetCompilerSettings<a class="headerlink" href="#cetcompilersettings" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">CetCompilerSettings</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sets CET Build Modes and Compiler Flags when included.</p>
+<p>Include this module to configure your project to use the CET standard
+build modes and C/C++/Fortran compiler flags. CMake options and functions
+are provided to manage warning levels, debugging format, symbol resolution
+policy, architecture level optimization and assertion activation.</p>
+<div class="section" id="cet-build-types-and-compiler-flags">
+<h2>CET Build Types and Compiler Flags<a class="headerlink" href="#cet-build-types-and-compiler-flags" title="Permalink to this headline">¶</a></h2>
+<p>CET uses the same build modes as vanilla CMake:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">None</span></code>: Base language flags only</li>
+<li><code class="docutils literal"><span class="pre">Release</span></code>: Highest optimization possible, debugging information</li>
+<li><code class="docutils literal"><span class="pre">Debug</span></code>: No optimization, debugging information</li>
+<li><code class="docutils literal"><span class="pre">MinSizeRel</span></code>: Highest optimization possible, debugging information plus frame pointer</li>
+<li><code class="docutils literal"><span class="pre">RelWithDebInfo</span></code>: Moderate optimization, debugging info</li>
+</ul>
+<p>For the GNU, Clang and Intel C/C++ compilers, these correspond to</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Release</span></code>: <code class="docutils literal"><span class="pre">-O3</span> <span class="pre">-g</span></code></li>
+<li><code class="docutils literal"><span class="pre">Debug</span></code>: <code class="docutils literal"><span class="pre">-O0</span> <span class="pre">-g</span></code></li>
+<li><code class="docutils literal"><span class="pre">MinSizeRel</span></code>: <code class="docutils literal"><span class="pre">-O3</span> <span class="pre">-g</span> <span class="pre">-fno-omit-frame-pointer</span></code></li>
+<li><code class="docutils literal"><span class="pre">RelWithDebInfo</span></code>: <code class="docutils literal"><span class="pre">-O2</span> <span class="pre">-g</span></code></li>
+</ul>
+<p>When building for single mode generators like Make and Ninja,
+the build type defaults to <code class="docutils literal"><span class="pre">RelWithDebInfo</span></code> if it is not already
+set.</p>
+</div>
+<div class="section" id="options-for-controlling-compiler-warnings">
+<h2>Options for Controlling Compiler Warnings<a class="headerlink" href="#options-for-controlling-compiler-warnings" title="Permalink to this headline">¶</a></h2>
+<p>The warnings checked for by the compiler are defined in CET by four
+levels:</p>
+<ul class="simple">
+<li>cavalier</li>
+<li>cautious (default?)</li>
+<li>vigilant</li>
+<li>paranoid</li>
+</ul>
+</div>
+<div class="section" id="options-for-controlling-debugging-output">
+<h2>Options for Controlling Debugging Output<a class="headerlink" href="#options-for-controlling-debugging-output" title="Permalink to this headline">¶</a></h2>
+<p>For compatible compilers, the DWARF debugging standard can be defined</p>
+</div>
+<div class="section" id="options-for-controlling-symbol-resolution">
+<h2>Options for Controlling Symbol Resolution<a class="headerlink" href="#options-for-controlling-symbol-resolution" title="Permalink to this headline">¶</a></h2>
+<p>Linkers may have different default policies for symbol resolution.
+CET prefer to fully resolved symbols.</p>
+</div>
+<div class="section" id="architecture-level-optimizations">
+<h2>Architecture Level Optimizations<a class="headerlink" href="#architecture-level-optimizations" title="Permalink to this headline">¶</a></h2>
+<p>Things like SSE/Vectorization...</p>
+</div>
+<div class="section" id="assertion-management">
+<h2>Assertion Management<a class="headerlink" href="#assertion-management" title="Permalink to this headline">¶</a></h2>
+<p>Cetbuildtools2 allows fine control over assertions by managing their
+deactivation (passing <code class="docutils literal"><span class="pre">NDEBUG</span></code> as a preprocessor define) on a
+directory-by-directory basis.</p>
+<p>The default policy is to only disable assertions in the Release and
+MinSizeRel build types.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Describe directory property behaviour</p>
+</div>
+<dl class="command">
+<dt id="command:cet_default_asserts">
+<code class="descname">cet_default_asserts</code><a class="headerlink" href="#command:cet_default_asserts" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cet_default_asserts</span><span class="p">(</span><span class="s">[DIRECTORY</span> <span class="s">&lt;dir&gt;]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Disable assertions (i.e. pass <code class="docutils literal"><span class="pre">NDEBUG</span></code> as a preprocessor define) for
+Release and MinSizeRel build modes in the current directory (<code class="docutils literal"><span class="pre">CMAKE_CURRENT_LIST_DIR</span></code>)
+and all its children.</p>
+<p>If <code class="docutils literal"><span class="pre">DIRECTORY</span></code> is passed, disable assertions for Release and MinSizeRel
+build modes in <code class="docutils literal"><span class="pre">&lt;dir&gt;</span></code> and all its children.</p>
+</dd></dl>
+
+<dl class="command">
+<dt id="command:cet_enable_asserts">
+<code class="descname">cet_enable_asserts</code><a class="headerlink" href="#command:cet_enable_asserts" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cet_enable_asserts</span><span class="p">(</span><span class="s">[DIRECTORY</span> <span class="s">&lt;dir&gt;]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Enable assertions (i.e. do not pass <code class="docutils literal"><span class="pre">NDEBUG</span></code> as a preprocessor define) for
+all build modes in the current directory (<code class="docutils literal"><span class="pre">CMAKE_CURRENT_LIST_DIR</span></code>) and all
+its children.</p>
+<p>If <code class="docutils literal"><span class="pre">DIRECTORY</span></code> is passed, enable assertions for all build modes in <code class="docutils literal"><span class="pre">&lt;dir&gt;</span></code>
+and all its children.</p>
+</dd></dl>
+
+<dl class="command">
+<dt id="command:cet_disable_asserts">
+<code class="descname">cet_disable_asserts</code><a class="headerlink" href="#command:cet_disable_asserts" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cet_disable_asserts</span><span class="p">(</span><span class="s">[DIRECTORY</span> <span class="s">&lt;dir&gt;]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Disable assertions (i.e. pass <code class="docutils literal"><span class="pre">NDEBUG</span></code> as a preprocessor define) for
+all build types in the current directory (<code class="docutils literal"><span class="pre">CMAKE_CURRENT_LIST_DIR</span></code>) and all
+its children.</p>
+<p>If <code class="docutils literal"><span class="pre">DIRECTORY</span></code> is passed, disable assertions for all build types in <code class="docutils literal"><span class="pre">&lt;dir&gt;</span></code>
+and all its children.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CetWriteCXXVersionAPI.html" class="btn btn-neutral float-right" title="CetWriteCXXVersionAPI" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="CetInstallDirs.html" class="btn btn-neutral" title="CetInstallDirs" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Ben Morgan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
