@@ -117,8 +117,6 @@ foreach(_lang "C" "CXX")
   endif()
 endforeach()
 
-
-
 if(CET_COMPILER_WARNINGS_ARE_ERRORS)
   foreach(_lang "C" "CXX")
     if(CMAKE_${_lang}_COMPILER_ID MATCHES "GNU|(Apple)+Clang|Intel")
@@ -334,4 +332,61 @@ function(cet_disable_asserts)
 endfunction()
 
 
+#-----------------------------------------------------------------------
+# Private implementation detail
+# - Combine flags and set default assertions on the project source
+#   directory
+# - General, All Mode Options
+string(TOUPPER "${CET_COMPILER_DIAGNOSTIC_LEVEL}" CET_COMPILER_DIAGNOSTIC_LEVEL)
+set(CMAKE_C_FLAGS "${CET_COMPILER_C_DIAGFLAGS_${CET_COMPILER_DIAGNOSTIC_LEVEL}} ${CET_COMPILER_C_ERROR_FLAGS} ${CMAKE_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CET_COMPILER_CXX_DIAGFLAGS_${CET_COMPILER_DIAGNOSTIC_LEVEL}} ${CET_COMPILER_CXX_ERROR_FLAGS} ${CMAKE_CXX_FLAGS}")
+
+# Per-Mode flags (Release, Debug, RelWithDebInfo, MinSizeRel)
+# DWARF done here as it's not completely generic like warnings
+# - C Language
+if(CMAKE_C_COMPILER_ID MATCHES "GNU|(Apple)+Clang|Intel")
+  set(CMAKE_C_FLAGS_RELEASE        "-O3 -g ${CET_COMPILER_C_DWARF_FLAGS}")
+  set(CMAKE_C_FLAGS_DEBUG          "-O0 -g ${CET_COMPILER_C_DWARF_FLAGS}")
+  set(CMAKE_C_FLAGS_MINSIZEREL     "-O3 -g ${CET_COMPILER_C_DWARF_FLAGS} -fno-om
+it-frame-pointer")
+  set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g")
+endif()
+
+# - CXX Language
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|(Apple)+Clang|Intel")
+  set(CMAKE_CXX_FLAGS_RELEASE        "-O3 -g ${CET_COMPILER_CXX_DWARF_FLAGS}")
+  set(CMAKE_CXX_FLAGS_DEBUG          "-O0 -g ${CET_COMPILER_CXX_DWARF_FLAGS}")
+  set(CMAKE_CXX_FLAGS_MINSIZEREL     "-O3 -g ${CET_COMPILER_CXX_DWARF_FLAGS} -fno-omit-frame-pointer")
+  set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
+endif()
+
+# - Fortran language
+# TODO
+
+# SSE2 flags only in release (optimized) modes?
+
+# Assertions are handled by compile definitions so they can be changed
+# on a per directory tree basis. Set defaults here for project
+cet_default_asserts(DIRECTORY "${PROJECT_SOURCE_DIR}")
+
+# - If user requested, enable assertions in all modes
+if(CET_COMPILER_ENABLE_ASSERTS)
+  cet_enable_asserts(DIRECTORY "${PROJECT_SOURCE_DIR}")
+endif()
+
+# If we're generating for single-mode and no build type has been set,
+# default to RelWithDebInfo
+if(NOT CMAKE_CONFIGURATION_TYPES)
+  if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE RelWithDebInfo
+      CACHE STRING "Choose the type of build, options are: None Release MinSizeRel Debug RelWithDebInfo"
+      FORCE
+      )
+  else()
+    set(CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}"
+      CACHE STRING "Choose the type of build, options are: None Release MinSizeRel Debug RelWithDebInfo"
+      FORCE
+      )
+  endif()
+endif()
 
