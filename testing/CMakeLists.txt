@@ -86,5 +86,21 @@ add_test(
           -P ${CMAKE_CURRENT_SOURCE_DIR}/testCetInstallDirs.cmake
   )
 
+#-----------------------------------------------------------------------
+# CetWriteCXXVersionAPI test
+#
+add_test(
+  NAME testCetWriteCXXVersionAPI_build_and_run
+  COMMAND ${CMAKE_CTEST_COMMAND}
+          --build-and-test ${CMAKE_CURRENT_LIST_DIR}/testCetWriteCXXVersionAPI ${CMAKE_CURRENT_BINARY_DIR}/testCetWriteCXXVersionAPI
+          --build-generator ${CMAKE_GENERATOR}
+          --build-makeprogram ${CMAKE_MAKE_PROGRAM}
+          --build-config $<CONFIG>
+          --build-options "-DCMAKE_MODULE_PATH=${PROJECT_SOURCE_DIR}/Modules"
+
+          --test-command testCetWriteCXXVersionAPI
+  )
+
+
 
 

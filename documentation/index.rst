@@ -1,13 +1,14 @@
 .. include:: ../README.rst
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :hidden:
    :caption: Using cetbuildtools2
 
    /users/introduction
    /users/CetCMakeUtilities
    /users/CetInstallDirs
+   /users/CetWriteCXXVersionAPI
 
 .. toctree::
    :maxdepth: 2
