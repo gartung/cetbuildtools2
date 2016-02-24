@@ -20,6 +20,10 @@ add_subdirectory(testing)
 # - Modules
 install(DIRECTORY Modules
   DESTINATION "${CMAKE_INSTALL_CMAKEDIR}"
+  PATTERN "Modules/cet_exec_test"
+  PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+              GROUP_EXECUTE GROUP_READ
+              WORLD_EXECUTE WORLD_READ
   )
 
 # - find_package support
