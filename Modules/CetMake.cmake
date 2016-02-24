@@ -69,9 +69,8 @@
 #   X systems).
 #
 ########################################################################
-cmake_policy(VERSION 3.0.1) # We've made this work for 3.0.1.
 
-include(CetParseArgs)
+include(CMakeParseArguments)
 include(InstallSource)
 
 # - ??
@@ -97,7 +96,12 @@ endmacro()
 macro(cet_make_exec cet_exec_name)
   set(cet_exec_file_list "")
   set(cet_make_exec_usage "USAGE: cet_make_exec( <executable name> [SOURCE <exec source>] [LIBRARIES <library list>] )")
-  cet_parse_args( CME "LIBRARIES;SOURCE" "USE_BOOST_UNIT;NO_INSTALL" ${ARGN})
+  cmake_parse_arguments(CME
+    "USE_BOOST_UNIT;NO_INSTALL"
+    ""
+    "LIBRARIES;SOURCE"
+    ${ARGN})
+  set(CME_DEFAULT_ARGS "${CME_UNPARSED_ARGUMENTS}")
 
   # there are no default arguments
   if(CME_DEFAULT_ARGS)
@@ -151,7 +155,12 @@ endmacro()
 macro(cet_make)
   set(cet_file_list "")
   set(cet_make_usage "USAGE: cet_make( [LIBRARY_NAME <library name>] [LIBRARIES <library list>] [SUBDIRS <source subdirectory>] [EXCLUDE <ignore these files>] )")
-  cet_parse_args(CM "LIBRARY_NAME;LIBRARIES;SUBDIRS;EXCLUDE" "WITH_STATIC_LIBRARY;USE_PRODUCT_NAME" ${ARGN})
+  cmake_parse_arguments(CM
+    "WITH_STATIC_LIBRARY;USE_PRODUCT_NAME"
+    ""
+    "LIBRARY_NAME;LIBRARIES;SUBDIRS;EXCLUDE"
+    ${ARGN})
+  set(CM_DEFAULT_ARGS "${CM_UNPARSED_ARGUMENTS}")
 
   # there are no default arguments
   if(CM_DEFAULT_ARGS)
@@ -304,7 +313,13 @@ endmacro()
 macro(cet_make_library)
   set(cet_file_list "")
   set(cet_make_library_usage "USAGE: cet_make_library( LIBRARY_NAME <library name> SOURCE <source code list> [LIBRARIES <library link list>] )")
-  cet_parse_args( CML "LIBRARY_NAME;LIBRARIES;SOURCE" "WITH_STATIC_LIBRARY;NO_INSTALL" ${ARGN})
+  cmake_parse_arguments(CML
+    "WITH_STATIC_LIBRARY;NO_INSTALL"
+    ""
+    "LIBRARY_NAME;LIBRARIES;SOURCE"
+    ${ARGN})
+  set(CML_DEFAULT_ARGS "${CML_UNPARSED_ARGUMENTS}")
+
   # there are no default arguments
   if(CML_DEFAULT_ARGS)
     message(FATAL_ERROR  " undefined arguments ${CML_DEFAULT_ARGS} \n ${cet_make_library_usage}")
@@ -381,7 +396,12 @@ file(MAKE_DIRECTORY "${EXECUTABLE_OUTPUT_PATH}/")
 
 # - Scripts
 macro(cet_script)
-  cet_parse_args(CS "DEPENDENCIES" "GENERATED;NO_INSTALL;REMOVE_EXTENSIONS" ${ARGN})
+  cmake_parse_arguments(CS
+    "GENERATED;NO_INSTALL;REMOVE_EXTENSIONS"
+    ""
+    "DEPENDENCIES"
+    ${ARGN})
+
   if(CS_GENERATED)
     set(CS_SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR})
   else()
