@@ -5,5 +5,5 @@ project(testCetCMakeSettings)
 # Mock inclusion of cetbuildtools2)
 set(CMAKE_MODULE_PATH ${cetbuildtools2_MODULE_PATH})
 
-include(CetUninstallTarget)
+include(CetCMakeSettings)
 
