@@ -6,9 +6,10 @@
    :caption: Using cetbuildtools2
 
    /users/introduction
+   /users/CetCompilerSettings
    /users/CetCMakeUtilities
    /users/CetInstallDirs
-   /users/CetCompilerSettings
+   /users/CetUninstallTarget
    /users/CetWriteCXXVersionAPI
 
 .. toctree::

@@ -101,6 +101,19 @@ add_test(
           --test-command testCetWriteCXXVersionAPI
   )
 
+#-----------------------------------------------------------------------
+# CetCMakeSettings test
+#
+add_test(
+  NAME testCetCMakeSettings_sanity
+  COMMAND ${CMAKE_CTEST_COMMAND}
+          --build-and-test ${CMAKE_CURRENT_LIST_DIR}/testCetCMakeSettings ${CMAKE_CURRENT_BINARY_DIR}/testCetCMakeSettings_sanity
+          --build-generator ${CMAKE_GENERATOR}
+          --build-makeprogram ${CMAKE_MAKE_PROGRAM}
+          --build-config $<CONFIG>
+          --build-options "-Dcetbuildtools2_MODULE_PATH=${PROJECT_SOURCE_DIR}/Modules"
+  )
+
 
 
 
