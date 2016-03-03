@@ -16,6 +16,13 @@
 .. toctree::
    :maxdepth: 2
    :hidden:
+   :caption: Additional Find Modules
+
+   /find-modules/FindBoost
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
    :caption: Developing cetbuildtools2
 
    /developers/cmakeguide
