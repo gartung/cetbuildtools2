@@ -179,14 +179,11 @@ endfunction()
 
   These settings assume that Boost has been located using CMake's
   builtin :cmake:module:`FindBoost <cmake:module:FindBoost>` module
-  before being called. If the CMake variables ``Boost_FOUND`` or
-  ``Boost_UNIT_TEST_FRAMEWORK_LIBRARY`` are not set, the function
+  before being called. If the CMake variable ``Boost_FOUND`` is not
+  set or no Boost Unit Test Framework library is supplied via the
+  ``Boost::unit_test_framework`` imported target or ``Boost_UNIT_TEST_FRAMEWORK_LIBRARY`` variable, the function
   raises a FATAL_ERROR. At present, no checking of Release vs Debug
   Boost libraries is performed.
-
-  .. todo::
-
-    Review usage of imported targets in CMake 3.5's FindBoost!
 
 #]]
 function(set_boost_unit_properties _target)
@@ -203,9 +200,10 @@ function(set_boost_unit_properties _target)
       "before using this function"
       )
   endif()
-  if(NOT Boost_UNIT_TEST_FRAMEWORK_LIBRARY)
+  if((NOT TARGET Boost::unit_test_framework)
+     OR (NOT Boost_UNIT_TEST_FRAMEWORK_LIBRARY))
     message(FATAL_ERROR
-      "set_boost_unit_properties: No Boost_UNIT_TEST_FRAMEWORK_LIBRARY found\n"
+      "set_boost_unit_properties: No Target of Variable found for Boost's Unite Test Framework\n"
       "Ensure the project calls\n"
       "find_package(Boost REQUIRED unit_test_framework)\n"
       "before using this function"
@@ -224,9 +222,13 @@ function(set_boost_unit_properties _target)
 
   # PRIVATE incs/libs for now as is assumed tests will not be installed
   # include directories - make private for now
-  target_include_directories(${_target} PRIVATE ${Boost_INCLUDE_DIRS})
   # libs to link - can't specify link rule here as others may use it.
-  target_link_libraries(${_target} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+  if(TARGET Boost::unit_test_framework)
+    target_link_libraries(${_target} Boost::unit_test_framework)
+  else()
+    target_include_directories(${_target} PRIVATE ${Boost_INCLUDE_DIRS})
+    target_link_libraries(${_target} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+  endif()
 endfunction()
 
 
