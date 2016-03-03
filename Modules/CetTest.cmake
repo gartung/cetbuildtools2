@@ -1,10 +1,28 @@
-########################################################################
-# cet_test: specify tests in a concise and transparent way (see also
-#           cet_test_env() and cet_test_assertion(), below).
+#.rst:
+# CetTest
+# -------
 #
-# Usage: cet_test(target [<options>] [<args>])
+# .. code-block:: cmake
 #
-####################################
+#   include(CetTest)
+#
+# Declare and define tests compatible with CET testing policies.
+#
+# Include this module at the root of your project's testing tree or
+# wherever you need to specify a test.
+#
+# The following functions are provided to help in declaring tests and
+# defining their properties
+#
+# .. cmake:command:: cet_test
+#
+#   .. code-block:: cmake
+#
+#     cet_test(<target> [<options>] [<args>]
+#
+# Specify tests in a concise and transparent way (see also
+# ``cet_test_env()`` and ``cet_test_assertion()``, below).
+#
 # Options:
 #
 # HANDBUILT
@@ -34,8 +52,7 @@
 # INSTALL_SOURCE
 #   Install this test's source in the source area of the product.
 #
-####################################
-# Args
+# Args:
 #
 # CONFIGURATIONS
 #
@@ -45,12 +62,12 @@
 #   Input and/or references files to be copied to the test area in the
 #    build tree for use by the test. If there is no path, or a relative
 #    path, the file is assumed to be in or under
-#    ${CMAKE_CURRENT_SOURCE_DIR}.
+#    ``CMAKE_CURRENT_SOURCE_DIR``.
 #
 # DEPENDENCIES
 #   List of top-level dependencies to consider for a PREBUILT
-#    target. Top-level implies a target (not file) created with ADD_EXECUTABLE,
-#    ADD_LIBRARY or ADD_CUSTOM_TARGET.
+#    target. Top-level implies a target (not file) created with
+#    ADD_EXECUTABLE, ADD_LIBRARY or ADD_CUSTOM_TARGET.
 #
 # LIBRARIES
 #   Extra libraries with which to link this target.
@@ -97,7 +114,6 @@
 #   Properties to be added to the test. See documentation of the cmake
 #    command, "set_tests_properties."
 #
-####################################
 # Cache variables
 #
 # CET_TEST_GROUPS
@@ -112,8 +128,7 @@
 # CET_DEFINED_TEST_GROUPS
 #  Any test group names CMake sees will be added to this list.
 #
-####################################
-# Notes:
+# Notes
 #
 # * cet_make_exec() and art_make_exec() are more flexible than building
 #   the test exec with cet_test(), and are to be preferred (use the
@@ -129,19 +144,20 @@
 # * If you intend to set the property SKIP_RETURN_CODE, you should use
 #   CET_TEST_PROPERTIES to set it rather than add_tests_properties(), as
 #   cet_test() needs to take account of your preference.
-########################################################################
-# cet_test_env: set environment for all tests here specified.
+#
+#
+# .. cmake:command:: cet_test_env
+#
+# set environment for all tests here specified.
 #
 # Usage: cet_test_env([<options] [<env>])
 #
-####################################
 # Options:
 #
 # CLEAR
 #   Clear the global test environment (ie anything previously set with
 #    cet_test_env()) before setting <env>.
 #
-####################################
 # Notes:
 #
 # * <env> may be omitted. If so and the CLEAR option is not specified,
@@ -152,12 +168,12 @@
 #   subdirectories unless include(CetTest) or cet_test_env(CLEAR ...) is
 #   invoked in that directory.
 #
-########################################################################
-# cet_test_assertion: require assertion failure on given condition
+# .. cmake:command:: cet_test_assertion
+#
+# require assertion failure on given condition
 #
 # Usage: cet_test_assertion(CONDITION TARGET...)
 #
-####################################
 # Notes:
 #
 # * CONDITION should be a CMake regex which should have any escaped
@@ -168,21 +184,19 @@
 # * TARGET...: the name(s) of the test target(s) as specified to
 #   cet_test() or add_test() -- require at least one.
 #
-########################################################################
-# Additional notes by Ben
-# - *think* cet_exec_test only exists to
-#   i) Remove any files that aren't supplied as datafiles or required?
-#  ii) 'Fail' if anything in datafiles or requiredfiles is missing?
-# - Appears to be some overlap between this and what CMake tests themselves
-#   can do (REQUIRED_FILES etc properties).
-# - Cleaning directory is good, but probably better to have tests with
-#   appropriate setup/teardown as well.
-
-########################################################################
 
 #-----------------------------------------------------------------------
 # Modifications Copyright 2015 Ben Morgan <Ben.Morgan@warwick.ac.uk
 # Modifications Copyright 2015 University of Warwick
+#
+# Distributed under the OSI-approved BSD 3-Clause License (the "License");
+# see accompanying file LICENSE for details.
+#
+# This software is distributed WITHOUT ANY WARRANTY; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the License for more information.
+#-----------------------------------------------------------------------
+
 
 # Need argument parser.
 include(CMakeParseArguments)

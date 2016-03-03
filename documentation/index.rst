@@ -9,6 +9,7 @@
    /users/CetCMakeSettings
    /users/CetCompilerSettings
    /users/CetInstallDirs
+   /users/CetTest
    /users/CetCMakeUtilities
    /users/CetUninstallTarget
    /users/CetWriteCXXVersionAPI
