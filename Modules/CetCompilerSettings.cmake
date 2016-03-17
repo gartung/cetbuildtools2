@@ -40,10 +40,17 @@ include(CetCMakeUtilities)
 
 #-----------------------------------------------------------------------
 #.rst:
-# CET Build Types and Compiler Flags
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# CET Base Compiler Flags and Build Types
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #
-# CET uses the same build modes as vanilla CMake:
+# Base flags for a language, that is ``CMAKE_<LANG>_FLAGS`` are always
+# set by prepending any required to the existing value of the ``CMAKE_<LANG>_FLAGS``
+# variable. This enables a project or environment to override or extend
+# flags by setting ``CMAKE_<LANG>_FLAGS`` in their own CMake scripts before
+# including this module.
+#
+# Additional flags are added depending on the build mode being used,
+# and CET uses the same set as defined by vanilla CMake:
 #
 # * ``None``: Base language flags only
 # * ``Release``: Highest optimization possible, debugging information
@@ -52,6 +59,7 @@ include(CetCMakeUtilities)
 # * ``RelWithDebInfo``: Moderate optimization, debugging info
 #
 # For the GNU, Clang and Intel C/C++ compilers, these correspond to
+# flags for optimization and debugging of:
 #
 # * ``Release``: ``-O3 -g``
 # * ``Debug``: ``-O0 -g``
@@ -67,13 +75,37 @@ include(CetCMakeUtilities)
 # Options for Controlling Compiler Warnings
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #
-# The warnings checked for by the compiler are defined in CET by four
-# levels:
+# .. cmake:variable:: CET_COMPILER_DIAGNOSTIC_LEVEL
 #
-# * cavalier
-# * cautious (default?)
-# * vigilant
-# * paranoid
+#   Option to select the level of compiler diagnostics to add to flags.
+#   The warnings checked for by the compiler are defined in CET by four
+#   levels, with the following flags prepended to ``CMAKE_C_FLAGS`` and ``CMAKE_CXX_FLAGS``.
+#   At present, diagnostic selection is only enabled for C and C++ languages
+#   and when using the GNU, Clang or Intel compilers.
+#
+#   * ``CAVALIER``
+#
+#     * No additional flags added for any compiler
+#
+#   * ``CAUTIOUS`` (default)
+#
+#     * All ``CAVALIER`` flags for the compiler in use, plus
+#     * GNU/Intel compilers: ``-Wall -Werror=return-type``
+#     * Clang compilers: ``-Wall -Werror=return-type -Wno-mismatched-tags -Wno-missing-braces``
+#
+#   * ``VIGILANT``
+#
+#     * All ``CAUTIOUS`` flags for the compiler in use, plus
+#     * GNU/Clang compilers: ``-Wextra -Wno-long-long -Winit-self -Wno-unused-local-typedefs``
+#     * Intel compilers: ``-Wextra -Wno-long-long -Winit-self``
+#     * GNU/Clang/Intel C++ compilers also add: ``-Woverloaded-virtual``
+#
+#   * ``PARANOID``
+#
+#     * All ``VIGILANT`` flags for the compiler in use, plus
+#     * GNU/Clang/Intel compilers: ``-pedantic -Wformat-y2k -Wswitch-default -Wsync-nand -Wtrampolines -Wlogical-op -Wshadow -Wcast-qual``
+#     * NB: these are known to be GNU specific at present, but are retained until
+#       a good set for each compiler can be developed.
 #
 enum_option(CET_COMPILER_DIAGNOSTIC_LEVEL
   VALUES CAVALIER CAUTIOUS VIGILANT PARANOID
@@ -99,8 +131,23 @@ foreach(_lang "C" "CXX")
   # GNU/Clang/Intel are mostly common...
   if(CMAKE_${_lang}_COMPILER_ID MATCHES "GNU|(Apple)+Clang|Intel")
     # C/C++ common
+    # - Basic
     set(CET_COMPILER_${_lang}_DIAGFLAGS_CAVALIER "")
+
+    # - Cautious
     set(CET_COMPILER_${_lang}_DIAGFLAGS_CAUTIOUS "${CET_COMPILER_${_lang}_DIAGFLAGS_CAVALIER} -Wall -Werror=return-type")
+    # Clang's -Wall activates a larger number of warnings than GCC, and
+    # can lead to spurious warnings, so turn the following off:
+    # mismatched-tags : Seemingly only needed for systems that may
+    #                   mangle struct/class differently
+    # missing-braces  : Down to parsing/standard behaviour, see
+    #                   https://gcc.gnu.org/bugzilla/show_bug.cgi?id=25137
+    #                   https://llvm.org/bugs/show_bug.cgi?id=21629
+    if(CMAKE_${_lang}_COMPILER_ID MATCHES "(Apple)+Clang")
+      set(CET_COMPILER_${_lang}_DIAGFLAGS_CAUTIOUS "${CET_COMPILER_${_lang}_DIAGFLAGS_CAVALIER} -Wno-mismatched-tags -Wno-missing-braces")
+    endif()
+
+    # - Vigilant
     set(CET_COMPILER_${_lang}_DIAGFLAGS_VIGILANT "${CET_COMPILER_${_lang}_DIAGFLAGS_CAUTIOUS} -Wextra -Wno-long-long -Winit-self")
 
     # We want -Wno-unused-local-typedef in VIGILANT, but Intel doesn't know this
@@ -113,6 +160,7 @@ foreach(_lang "C" "CXX")
       set(CET_COMPILER_CXX_DIAGFLAGS_VIGILANT "${CET_COMPILER_CXX_DIAGFLAGS_VIGILANT} -Woverloaded-virtual")
     endif()
 
+    # - Paranoid
     set(CET_COMPILER_${_lang}_DIAGFLAGS_PARANOID "${CET_COMPILER_${_lang}_DIAGFLAGS_VIGILANT} -pedantic -Wformat-y2k -Wswitch-default -Wsync-nand -Wtrampolines -Wlogical-op -Wshadow -Wcast-qual")
   endif()
 endforeach()
@@ -133,7 +181,8 @@ endif()
 # Options for Controlling Debugging Output
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #
-# For compatible compilers, the DWARF debugging standard can be defined
+# For compatible compilers, the version and strictness of DWARF
+# debugging output may be controlled
 #
 option(CET_COMPILER_DWARF_STRICT "only emit DWARF debugging info at defined level" ON)
 # NB: this is a number, so again an enum option
