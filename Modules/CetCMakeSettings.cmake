@@ -25,6 +25,51 @@
 # General Build Settings
 # ^^^^^^^^^^^^^^^^^^^^^^
 #
+# The following CMake variables and options are configured by default
+# when including this module:
+#
+# - ``CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE`` : ON
+#
+#   - Force project directories to appear first in any list of include paths.
+#     This applies to both full paths and those created by generator expressions.
+#
+set(CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE ON)
+
+#.rst:
+# - ``CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION`` : ON
+#
+#   - CET policy is to install fully relocatable packages, so install
+#     directories should never be absolute. NB: This does not guarantee
+#     that a package *is* relocatable.
+#
+set(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION ON)
+
+#.rst:
+# - ``CMAKE_INSTALL_MESSAGE`` : ``LAZY``
+#
+#   - Only report new or updated files installed by the ``install`` target.
+#
+set(CMAKE_INSTALL_MESSAGE LAZY)
+
+#.rst:
+# - ``CMAKE_EXPORT_NO_PACKAGE_REGISTRY`` : ON
+# - ``CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY`` : ON
+# - ``CMAKE_FIND_PACKAGE_NO_SYSTEM_PACKAGE_REGISTRY`` : ON
+#
+#   - These variables are set to ensure that a project never creates or searches
+#     for config files in any package registry. This prevents the
+#     :cmake:command:`find_package <cmake:command:find_package>`
+#     command from locating potentially spurious config files.
+#
+set(CMAKE_EXPORT_NO_PACKAGE_REGISTRY ON)
+set(CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY ON)
+set(CMAKE_FIND_PACKAGE_NO_SYSTEM_PACKAGE_REGISTRY ON)
+
+#.rst:
+#
+# In addition to the base setting above, configurable options are provided for
+# enabling/disabling extra targets and functionality:
+#
 # .. cmake:variable:: CET_BUILD_NO_UNINSTALL_TARGET
 #
 #   Option to disable creation of an ``uninstall`` target for the project.
@@ -33,13 +78,14 @@
 #   See the documentation of the ``CetUninstallTarget``
 #   module for more details on what this target does.
 #
-
 option(CET_BUILD_NO_UNINSTALL_TARGET "Disable creation of an `uninstall` target" OFF)
 mark_as_advanced(CET_BUILD_NO_UNINSTALL_TARGET)
 
 if(NOT CET_BUILD_NO_UNINSTALL_TARGET)
   include("${CMAKE_CURRENT_LIST_DIR}/CetUninstallTarget.cmake")
 endif()
+
+
 
 #.rst:
 # CTest/Testing Settings
