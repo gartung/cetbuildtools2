@@ -81,7 +81,7 @@ if(TEST_REF_ERR)
 endif()
 
 if(NOT OUTPUT_FILTER)
-  set(OUTPUT_FILTER filter-output)
+  set(OUTPUT_FILTER ${CMAKE_CURRENT_LIST_DIR}/filter-output)
 endif()
 
 # Run the test command and save the output.
