@@ -64,7 +64,7 @@ find_package_handle_standard_args(SQLite
   FOUND_VAR
     SQLite_FOUND
   REQUIRED_VARS
-    SQLite_INCLUDE_DIRS
+    SQLite_INCLUDE_DIR
     SQLite_LIBRARY
   VERSION_VAR
     SQLite_VERSION
