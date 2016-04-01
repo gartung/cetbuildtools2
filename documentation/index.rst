@@ -20,6 +20,7 @@
    :caption: Additional Find Modules
 
    /find-modules/FindBoost
+   /find-modules/FindSQLite
 
 .. toctree::
    :maxdepth: 2
