@@ -26,7 +26,7 @@ Installing ``cetbuildtools2``
 -----------------------------
 Prerequisites:
 
-* `CMake`_ 3.0 or higher
+* `CMake`_ 3.3 or higher
 * *Optional:* `Sphinx`_ for building HTML and man documentation
 
 Create build directory outside the ``cetbuildtools2`` source directory (i.e.
@@ -75,6 +75,9 @@ Like any other package, ``cetbuildtools2`` may be located by CMake-based project
   set(CMAKE_MODULE_PATH ${cetbuildtools2_MODULE_PATH})
   # Or list(APPEND CMAKE_MODULE_PATH "${cetbuildtools2_MODULE_PATH}")
   # if your project uses additional module paths
+  include(CetInstallDirs)
+  include(CetCMakeSettings)
+  include(CetCompilerSettings)
 
 If ``cetbuildtools2`` is not installed in the default locations known to CMake, then you can help CMake to locate it by
 using:
