@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Documenting CMake Modules and other Constructs &mdash; cetbuildtools2 0.1.0 documentation</title>
+  <title>FindSQLite &mdash; cetbuildtools2 0.1.0 documentation</title>
   
 
   
@@ -31,7 +31,8 @@
 
   
     <link rel="top" title="cetbuildtools2 0.1.0 documentation" href="../index.html"/>
-        <link rel="prev" title="CMake Coding Conventions for cetbuildtools2" href="cmakeguide.html"/> 
+        <link rel="next" title="CMake Coding Conventions for cetbuildtools2" href="../developers/cmakeguide.html"/>
+        <link rel="prev" title="FindBoost" href="FindBoost.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -99,23 +100,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../users/CetWriteCXXVersionAPI.html">CetWriteCXXVersionAPI</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Additional Find Modules</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../find-modules/FindBoost.html">FindBoost</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindBoost.html#boost-cmake">Boost CMake</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="FindBoost.html">FindBoost</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="FindBoost.html#boost-cmake">Boost CMake</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../find-modules/FindSQLite.html">FindSQLite</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindSQLite.html#imported-targets">Imported Targets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindSQLite.html#result-variables">Result Variables</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">FindSQLite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#imported-targets">Imported Targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#result-variables">Result Variables</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Developing cetbuildtools2</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="cmakeguide.html">CMake Coding Conventions for cetbuildtools2</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Documenting CMake Modules and other Constructs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#documenting-a-module">Documenting a Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#keeping-section-levels-consistent">Keeping Section Levels Consistent</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developers/cmakeguide.html">CMake Coding Conventions for cetbuildtools2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/cmakedocs.html">Documenting CMake Modules and other Constructs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers/cmakedocs.html#documenting-a-module">Documenting a Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers/cmakedocs.html#keeping-section-levels-consistent">Keeping Section Levels Consistent</a></li>
 </ul>
 </li>
 </ul>
@@ -142,11 +143,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>Documenting CMake Modules and other Constructs</li>
+    <li>FindSQLite</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/developers/cmakedocs.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/find-modules/FindSQLite.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -155,49 +156,28 @@
 </div>
           <div role="main" class="document">
             
-  <div class="section" id="documenting-cmake-modules-and-other-constructs">
-<h1>Documenting CMake Modules and other Constructs<a class="headerlink" href="#documenting-cmake-modules-and-other-constructs" title="Permalink to this headline">¶</a></h1>
-<p>cetbuildtools2 provides a vendored copy of CMake&#8217;s Sphinx extension to parse
-and generate documentation for CMake modules. <a class="reference external" href="http://www.sphinx-doc.org/en/stable/ext/intersphinx.html">Intersphinx</a> is used to
-cross-reference to the upstream CMake documentation where required.
-It&#8217;s therefore recommended to document modules and their functionality using the
-domain and style guides outlined in the <span class="target" id="index-0-manual:cmake:manual:cmake-developer(7)"></span><a class="reference external" href="https://cmake.org/cmake/help/latest/manual/cmake-developer.7.html#manual:cmake-developer(7)" title="(in CMake v3.5.1)"><code class="xref cmake cmake-manual docutils literal"><span class="pre">CMake</span> <span class="pre">Developer</span> <span class="pre">Guide</span></code></a>.</p>
-<div class="section" id="documenting-a-module">
-<h2>Documenting a Module<a class="headerlink" href="#documenting-a-module" title="Permalink to this headline">¶</a></h2>
-<p>To integrate a module <code class="docutils literal"><span class="pre">&lt;module-name&gt;</span></code> into the cetbuildtools2 documentation, create a
-new <code class="docutils literal"><span class="pre">.rst</span></code> file in <code class="docutils literal"><span class="pre">documentation/users</span></code> named <code class="docutils literal"><span class="pre">&lt;module-name&gt;.rst</span></code>. The contents of this
-file only needs to contain the single line:</p>
-<div class="highlight-rest"><div class="highlight"><pre><span class="p">..</span> <span class="ow">cmake-module</span><span class="p">::</span> ../../Modules/&lt;module-name&gt;.cmake
+  <div class="section" id="findsqlite">
+<h1>FindSQLite<a class="headerlink" href="#findsqlite" title="Permalink to this headline">¶</a></h1>
+<p>Find the native SQLite includes and libraries</p>
+<div class="section" id="imported-targets">
+<h2>Imported Targets<a class="headerlink" href="#imported-targets" title="Permalink to this headline">¶</a></h2>
+<p>If SQLite is found, this module defines the following <span class="target" id="index-0-prop_tgt:IMPORTED"></span><code class="xref cmake cmake-prop_tgt docutils literal"><span class="pre">IMPORTED</span></code>
+targets:</p>
+<div class="highlight-python"><div class="highlight"><pre>SQLite::SQLite           - The main SQLite library
+SQLite::SQLiteExecutable - The main SQlite program
 </pre></div>
 </div>
-<p>To add this document in the build, simply add it in the <code class="docutils literal"><span class="pre">documentation/index.rst</span></code>
-under the &#8220;Using cetbuildtools2&#8221; toctree, keeping the entries in alphabetical order.
-For example, adding a new module <code class="docutils literal"><span class="pre">bar</span></code>:</p>
-<div class="highlight-rest"><div class="highlight"><pre><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
-   <span class="nc">:maxdepth:</span> <span class="nf">2</span>
-   <span class="nc">:hidden:</span>
-   <span class="nc">:caption:</span> <span class="nf">Using cetbuildtools2</span>
-
-   /users/introduction
-   /users/alice
-   /users/bar
-   /users/bob
+</div>
+<div class="section" id="result-variables">
+<h2>Result Variables<a class="headerlink" href="#result-variables" title="Permalink to this headline">¶</a></h2>
+<p>This module wil set the following variables in your project:</p>
+<div class="highlight-python"><div class="highlight"><pre>SQLite_FOUND        - True if an install of SQLite is found
+SQLite_INCLUDE_DIRS - Location of SQLite header files
+SQLite_LIBRARIES    - The SQLite libraries
+SQLite_EXECUTABLE   - Path to sqlite executable
+SQLite_VERSION      - The version of the found SQLite install
 </pre></div>
 </div>
-<p>Simply rebuild and the new module should appear in the generated documentation
-. Open <code class="docutils literal"><span class="pre">&lt;build-dir&gt;/documentation/html/index.html</span></code> in a browser and check
-that the document appears and is formatted correctly.</p>
-</div>
-<div class="section" id="keeping-section-levels-consistent">
-<h2>Keeping Section Levels Consistent<a class="headerlink" href="#keeping-section-levels-consistent" title="Permalink to this headline">¶</a></h2>
-<p>To ensure that the TOC panels remain consistent when browsing through the documentation,
-use the following characters for marking sections (underlines etc):</p>
-<dl class="docutils">
-<dt><code class="docutils literal"><span class="pre">-</span></code></dt>
-<dd>Title of any document one level below the <code class="docutils literal"><span class="pre">documentation/</span></code> directory</dd>
-<dt><code class="docutils literal"><span class="pre">^</span></code></dt>
-<dd>Sections of any document one level below the <code class="docutils literal"><span class="pre">documentation/</span></code> directory</dd>
-</dl>
 </div>
 </div>
 
@@ -207,8 +187,10 @@ use the following characters for marking sections (underlines etc):</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../developers/cmakeguide.html" class="btn btn-neutral float-right" title="CMake Coding Conventions for cetbuildtools2" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="cmakeguide.html" class="btn btn-neutral" title="CMake Coding Conventions for cetbuildtools2" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="FindBoost.html" class="btn btn-neutral" title="FindBoost" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

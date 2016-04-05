@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CetWriteCXXVersionAPI &mdash; cetbuildtools2 0.1.0 documentation</title>
+  <title>CetUninstallTarget &mdash; cetbuildtools2 0.1.0 documentation</title>
   
 
   
@@ -31,8 +31,8 @@
 
   
     <link rel="top" title="cetbuildtools2 0.1.0 documentation" href="../index.html"/>
-        <link rel="next" title="FindBoost" href="../find-modules/FindBoost.html"/>
-        <link rel="prev" title="CetUninstallTarget" href="CetUninstallTarget.html"/> 
+        <link rel="next" title="CetWriteCXXVersionAPI" href="CetWriteCXXVersionAPI.html"/>
+        <link rel="prev" title="CetCMakeUtilities" href="CetCMakeUtilities.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -96,8 +96,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="CetTest.html">CetTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CetCMakeUtilities.html">CetCMakeUtilities</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CetUninstallTarget.html">CetUninstallTarget</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">CetWriteCXXVersionAPI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">CetUninstallTarget</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetWriteCXXVersionAPI.html">CetWriteCXXVersionAPI</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Additional Find Modules</span></p>
 <ul>
@@ -143,11 +143,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>CetWriteCXXVersionAPI</li>
+    <li>CetUninstallTarget</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/users/CetWriteCXXVersionAPI.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/users/CetUninstallTarget.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -156,54 +156,34 @@
 </div>
           <div role="main" class="document">
             
-  <div class="section" id="cetwritecxxversionapi">
-<h1>CetWriteCXXVersionAPI<a class="headerlink" href="#cetwritecxxversionapi" title="Permalink to this headline">¶</a></h1>
-<dl class="command">
-<dt id="command:cet_write_cxx_version_api">
-<code class="descname">cet_write_cxx_version_api</code><a class="headerlink" href="#command:cet_write_cxx_version_api" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cet_write_cxx_version_api</span><span class="p">(</span><span class="s">NAMESPACE</span>      <span class="s">&lt;ns&gt;</span>
-                          <span class="s">TYPENAME</span>       <span class="s">&lt;type&gt;</span>
-                          <span class="s">[HEADER_FILE</span>   <span class="s">&lt;path&gt;]</span><span class="p">)</span>
+  <div class="section" id="cetuninstalltarget">
+<h1>CetUninstallTarget<a class="headerlink" href="#cetuninstalltarget" title="Permalink to this headline">¶</a></h1>
+<p>Add an <code class="docutils literal"><span class="pre">uninstall</span></code> target.</p>
+<p>By including this module, an <code class="docutils literal"><span class="pre">uninstall</span></code> target will be added to your CMake
+project. This will remove all files installed (or updated) by a previous
+invocation of the <code class="docutils literal"><span class="pre">install</span></code> target. It will not remove files created or
+modified by an <code class="docutils literal"><span class="pre">install(SCRIPT)</span></code> or <code class="docutils literal"><span class="pre">install(CODE)</span></code> command; you should
+create a custom uninstallation target for these and use <code class="docutils literal"><span class="pre">add_dependency</span></code> to
+make the <code class="docutils literal"><span class="pre">uninstall</span></code> target depend on it:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">include</span><span class="p">(</span><span class="s">CetUninstallTarget</span><span class="p">)</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">SCRIPT</span> <span class="s">install-foo.cmake</span><span class="p">)</span>
+<span class="nb">add_custom_target</span><span class="p">(</span><span class="s">uninstall_foo</span> <span class="s">COMMAND</span> <span class="o">${</span><span class="nv">CMAKE_COMMAND</span><span class="o">}</span> <span class="s">-P</span> <span class="s">uninstall-foo.cmake</span><span class="p">)</span>
+<span class="nb">add_dependency</span><span class="p">(</span><span class="s">uninstall</span> <span class="s">uninstall_foo</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Write C++ header and source files defining a compile and runtime
-API for reporting and checking project version numbers following
-MAJOR.MINOR.PATCH style versioning.</p>
-<p>Identifiers for the C++ namespace and struct holding the API as member
-functions must be specified using the <code class="docutils literal"><span class="pre">NAMESPACE</span></code> and <code class="docutils literal"><span class="pre">TYPENAME</span></code>
-arguments. <code class="docutils literal"><span class="pre">NAMESPACE</span></code> may be as many levels deep as you require.
-For example, setting <code class="docutils literal"><span class="pre">NAMESPACE</span></code> to &#8220;Foo::Bar&#8221; and <code class="docutils literal"><span class="pre">TYPENAME</span></code>
-to &#8220;Version&#8221; constructs a forward declaration and struct definition:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="k">namespace</span> <span class="n">Foo</span> <span class="p">{</span>
-  <span class="k">namespace</span> <span class="n">Bar</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">Version</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">struct</span> <span class="n">Foo</span><span class="o">::</span><span class="n">Bar</span><span class="o">::</span><span class="n">Version</span> <span class="p">{</span>
-  <span class="c1">// functions</span>
-<span class="p">};</span>
-</pre></div>
+<p>The target will fail if the <code class="docutils literal"><span class="pre">install</span></code> target has not yet been run (so it is
+not possible to run CMake on the project and then immediately run the
+<code class="docutils literal"><span class="pre">uninstall</span></code> target).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">CMake deliberately does not provide an <code class="docutils literal"><span class="pre">uninstall</span></code> target by default on
+the basis that such a target has the potential to remove important files
+from a user&#8217;s computer. Use with caution.</p>
 </div>
-<p>By default the header and source file are output in the current binary
-directory and named &#8220;<code class="docutils literal"><span class="pre">&lt;type&gt;.h</span></code>&#8221; and &#8220;<code class="docutils literal"><span class="pre">&lt;type&gt;.cc</span></code>&#8221;. This may be modified
-using the <code class="docutils literal"><span class="pre">HEADER_FILE</span></code> argument, supplying <code class="docutils literal"><span class="pre">&lt;path&gt;</span></code> as the required
-output location and name (including extension) of the header. The resultant
-source file will be output alongside the header with the same name plus
-an additional <code class="docutils literal"><span class="pre">.cc</span></code> extension. If <code class="docutils literal"><span class="pre">&lt;path&gt;</span></code> is supplied as a relative
-path, it is evaluated relative to the current binary directory.</p>
-<p>Version component values are taken from the CMake variables
-<code class="docutils literal"><span class="pre">&lt;PROJECT_NAME&gt;_VERSION_MAJOR</span></code>, <code class="docutils literal"><span class="pre">&lt;PROJECT_NAME&gt;_VERSION_MINOR</span></code> and
-<code class="docutils literal"><span class="pre">&lt;PROJECT_NAME&gt;_VERSION_PATCH</span></code> are used. A FATAL_ERROR is raised
-if any of these is not defined. If the variable is defined but empty,
-the version component is taken as 0.</p>
-<p>The header file macros, struct and member functions are documented
-using Doxygen style markup.</p>
-<p>The generated source file includes the header file using an absolute
-path, so it can be compiled into a target without additional setting
-of include directories of compile definitions.</p>
-</dd></dl>
-
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This module was adapted from original code in the KDE <a class="reference external" href="https://projects.kde.org/projects/kdesupport/extra-cmake-modules">Extra CMake Modules</a> project, distributed under the OSI-Approved BSD License.</p>
+</div>
 </div>
 
 
@@ -212,10 +192,10 @@ of include directories of compile definitions.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../find-modules/FindBoost.html" class="btn btn-neutral float-right" title="FindBoost" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="CetWriteCXXVersionAPI.html" class="btn btn-neutral float-right" title="CetWriteCXXVersionAPI" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="CetUninstallTarget.html" class="btn btn-neutral" title="CetUninstallTarget" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="CetCMakeUtilities.html" class="btn btn-neutral" title="CetCMakeUtilities" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

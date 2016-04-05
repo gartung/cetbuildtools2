@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CetTest &mdash; cetbuildtools2 0.1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="cetbuildtools2 0.1.0 documentation" href="../index.html"/>
+        <link rel="next" title="CetCMakeUtilities" href="CetCMakeUtilities.html"/>
+        <link rel="prev" title="CetInstallDirs" href="CetInstallDirs.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../index.html" class="icon icon-home"> cetbuildtools2
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">Using cetbuildtools2</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to cetbuildtools2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetCMakeSettings.html">CetCMakeSettings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CetCMakeSettings.html#general-build-settings">General Build Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCMakeSettings.html#ctest-testing-settings">CTest/Testing Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CetCompilerSettings.html">CetCompilerSettings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#cet-base-compiler-flags-and-build-types">CET Base Compiler Flags and Build Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#options-for-controlling-compiler-warnings">Options for Controlling Compiler Warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#options-for-controlling-debugging-output">Options for Controlling Debugging Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#options-for-controlling-symbol-resolution">Options for Controlling Symbol Resolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#architecture-level-optimizations">Architecture Level Optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#assertion-management">Assertion Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CetInstallDirs.html">CetInstallDirs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CetInstallDirs.html#result-variables">Result Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetInstallDirs.html#install-hierarchy-policies">Install Hierarchy Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetInstallDirs.html#install-build-directory-functions">Install/Build Directory Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">CetTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetCMakeUtilities.html">CetCMakeUtilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetUninstallTarget.html">CetUninstallTarget</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetWriteCXXVersionAPI.html">CetWriteCXXVersionAPI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Additional Find Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../find-modules/FindBoost.html">FindBoost</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindBoost.html#boost-cmake">Boost CMake</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../find-modules/FindSQLite.html">FindSQLite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindSQLite.html#imported-targets">Imported Targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindSQLite.html#result-variables">Result Variables</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Developing cetbuildtools2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developers/cmakeguide.html">CMake Coding Conventions for cetbuildtools2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/cmakedocs.html">Documenting CMake Modules and other Constructs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers/cmakedocs.html#documenting-a-module">Documenting a Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers/cmakedocs.html#keeping-section-levels-consistent">Keeping Section Levels Consistent</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">cetbuildtools2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>CetTest</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/users/CetTest.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="cettest">
+<h1>CetTest<a class="headerlink" href="#cettest" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">include</span><span class="p">(</span><span class="s">CetTest</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Declare and define tests compatible with CET testing policies.</p>
+<p>Include this module at the root of your project&#8217;s testing tree or
+wherever you need to specify a test.</p>
+<p>The following functions are provided to help in declaring tests and
+defining their properties</p>
+<dl class="command">
+<dt id="command:cet_test">
+<code class="descname">cet_test</code><a class="headerlink" href="#command:cet_test" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cet_test</span><span class="p">(</span><span class="s">&lt;target&gt;</span> <span class="s">[&lt;options&gt;]</span> <span class="s">[&lt;args&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Specify tests in a concise and transparent way (see also
+<code class="docutils literal"><span class="pre">cet_test_env()</span></code> and <code class="docutils literal"><span class="pre">cet_test_assertion()</span></code>, below).</p>
+<p>Options:</p>
+<dl class="docutils">
+<dt>HANDBUILT</dt>
+<dd><dl class="first last docutils">
+<dt>Do not build the target &#8211; it will be provided. This option is</dt>
+<dd>mutually exclusive with the PREBUILT option.</dd>
+</dl>
+</dd>
+<dt>PREBUILT</dt>
+<dd><dl class="first last docutils">
+<dt>Do not build the target &#8211; pick it up from the source dir (eg</dt>
+<dd>scripts).  This option is mutually exclusive with the HANDBUILT
+option and simply calls the cet_script() function with appropriate
+options.</dd>
+</dl>
+</dd>
+<dt>NO_AUTO</dt>
+<dd>Do not add the target to the auto test list.</dd>
+<dt>USE_BOOST_UNIT</dt>
+<dd>This test uses the Boost Unit Test Framework.</dd>
+<dt>INSTALL_BIN</dt>
+<dd>Install this test&#8217;s script / exec in the product&#8217;s binary directory
+(ignored for HANDBUILT).</dd>
+<dt>INSTALL_EXAMPLE</dt>
+<dd><dl class="first last docutils">
+<dt>Install this test and all its data files into the examples area of the</dt>
+<dd>product.</dd>
+</dl>
+</dd>
+<dt>INSTALL_SOURCE</dt>
+<dd>Install this test&#8217;s source in the source area of the product.</dd>
+</dl>
+<p>Args:</p>
+<p>CONFIGURATIONS</p>
+<blockquote>
+<div>Configurations (Debug, etc, etc) under which the test shall be executed.</div></blockquote>
+<dl class="docutils">
+<dt>DATAFILES</dt>
+<dd><dl class="first last docutils">
+<dt>Input and/or references files to be copied to the test area in the</dt>
+<dd>build tree for use by the test. If there is no path, or a relative
+path, the file is assumed to be in or under
+<code class="docutils literal"><span class="pre">CMAKE_CURRENT_SOURCE_DIR</span></code>.</dd>
+</dl>
+</dd>
+<dt>DEPENDENCIES</dt>
+<dd><dl class="first last docutils">
+<dt>List of top-level dependencies to consider for a PREBUILT</dt>
+<dd>target. Top-level implies a target (not file) created with
+ADD_EXECUTABLE, ADD_LIBRARY or ADD_CUSTOM_TARGET.</dd>
+</dl>
+</dd>
+<dt>LIBRARIES</dt>
+<dd>Extra libraries with which to link this target.</dd>
+<dt>OPTIONAL_GROUPS</dt>
+<dd><dl class="first last docutils">
+<dt>Assign this test to one or more named optional groups. If the CMake</dt>
+<dd>list variable CET_TEST_GROUPS is set (e.g. with -D on the CMake
+command line) and there is overlap between the two lists, execute
+the test. The CET_TEST_GROUPS cache variable may additionally
+contain the optional values ALL or NONE.</dd>
+</dl>
+</dd>
+<dt>REF</dt>
+<dd><dl class="first last docutils">
+<dt>The standard output of the test will be captured and compared against</dt>
+<dd>the specified reference file. It is an error to specify this
+argument and either the PASS_REGULAR_EXPRESSION or
+FAIL_REGULAR_EXPRESSION test properties to the TEST_PROPERTIES
+argument: success is the logical AND of the exit code from execution
+of the test as originally specified, and the success of the
+filtering and subsequent comparison of the output (and optionally,
+the error stream). Optionally, a second element may be specified
+representing a reference for the error stream; otherwise, standard
+error will be ignored.</dd>
+<dt>If REF is specified, then OUTPUT_FILTER and OUTPUT_FILTER_ARGS may</dt>
+<dd>also be specified. OUTPUT_FILTER must be a program which expects an
+input filename as argument and puts the filtered output on STDOUT.</dd>
+</dl>
+</dd>
+<dt>REQUIRED_FILES</dt>
+<dd>These files are required to be present before the test will be
+executed. If any are missing, ctest will record NOT RUN for this
+test.</dd>
+<dt>SOURCES</dt>
+<dd>Sources to use to build the target (default is ${target}.cc).</dd>
+<dt>TEST_ARGS</dt>
+<dd>Any arguments to the test to be run.</dd>
+<dt>TEST_EXEC</dt>
+<dd><dl class="first last docutils">
+<dt>The exec to run (if not the target). The HANDBUILT option must</dt>
+<dd>be specified in conjunction with this option.</dd>
+</dl>
+</dd>
+<dt>TEST_PROPERTIES</dt>
+<dd><dl class="first last docutils">
+<dt>Properties to be added to the test. See documentation of the cmake</dt>
+<dd>command, &#8220;set_tests_properties.&#8221;</dd>
+</dl>
+</dd>
+</dl>
+<p>Cache variables</p>
+<dl class="docutils">
+<dt>CET_TEST_GROUPS</dt>
+<dd><dl class="first last docutils">
+<dt>Test group names specified using the OPTIONAL_GROUPS list option are</dt>
+<dd>compared against this list to determine whether to configure the
+test. Default value is the special value &#8220;NONE,&#8221; meaning no
+optional tests are to be configured. Optionally CET_TEST_GROUPS may
+contain the special value &#8220;ALL.&#8221; Specify multiple values separated
+by &#8221;;&#8221; (escape or protect with quotes) or &#8221;,&#8221; See explanation of
+the OPTIONAL_GROUPS variable above for more details.</dd>
+</dl>
+</dd>
+<dt>CET_DEFINED_TEST_GROUPS</dt>
+<dd>Any test group names CMake sees will be added to this list.</dd>
+</dl>
+<p>Notes</p>
+<ul class="simple">
+<li>cet_make_exec() and art_make_exec() are more flexible than building
+the test exec with cet_test(), and are to be preferred (use the
+NO_INSTALL option to same as appropriate). Use
+cet_test(... HANDBUILT TEST_EXEC ...) to use test execs built this
+way.</li>
+<li>The CMake properties PASS_REGULAR_EXPRESSION and
+FAIL_REGULAR_EXPRESSION are incompatible with the REF option, but we
+cannot check for them if you use CMake&#8217;s add_tests_properties()
+rather than cet_test(CET_TEST_PROPERTIES ...).</li>
+<li>If you intend to set the property SKIP_RETURN_CODE, you should use
+CET_TEST_PROPERTIES to set it rather than add_tests_properties(), as
+cet_test() needs to take account of your preference.</li>
+</ul>
+<dl class="command">
+<dt id="command:cet_test_env">
+<code class="descname">cet_test_env</code><a class="headerlink" href="#command:cet_test_env" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>set environment for all tests here specified.</p>
+<p>Usage: cet_test_env([&lt;options] [&lt;env&gt;])</p>
+<p>Options:</p>
+<dl class="docutils">
+<dt>CLEAR</dt>
+<dd><dl class="first last docutils">
+<dt>Clear the global test environment (ie anything previously set with</dt>
+<dd>cet_test_env()) before setting &lt;env&gt;.</dd>
+</dl>
+</dd>
+</dl>
+<p>Notes:</p>
+<ul class="simple">
+<li>&lt;env&gt; may be omitted. If so and the CLEAR option is not specified,
+then cet_test_env() is a NOP.</li>
+<li>If cet_test_env() is called in a directory to set the environment
+for tests then that will be propagated to tests defined in
+subdirectories unless include(CetTest) or cet_test_env(CLEAR ...) is
+invoked in that directory.</li>
+</ul>
+<dl class="command">
+<dt id="command:cet_test_assertion">
+<code class="descname">cet_test_assertion</code><a class="headerlink" href="#command:cet_test_assertion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>require assertion failure on given condition</p>
+<p>Usage: cet_test_assertion(CONDITION TARGET...)</p>
+<p>Notes:</p>
+<ul class="simple">
+<li>CONDITION should be a CMake regex which should have any escaped
+items doubly-escaped due to being passed as a string argument
+(e.g. &#8220;\\(&#8221; for a literal open-parenthesis, &#8220;\\.&#8221; for a literal
+period).</li>
+<li>TARGET...: the name(s) of the test target(s) as specified to
+cet_test() or add_test() &#8211; require at least one.</li>
+</ul>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CetCMakeUtilities.html" class="btn btn-neutral float-right" title="CetCMakeUtilities" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="CetInstallDirs.html" class="btn btn-neutral" title="CetInstallDirs" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Ben Morgan.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

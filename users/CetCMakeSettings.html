@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CetWriteCXXVersionAPI &mdash; cetbuildtools2 0.1.0 documentation</title>
+  <title>CetCMakeSettings &mdash; cetbuildtools2 0.1.0 documentation</title>
   
 
   
@@ -31,8 +31,8 @@
 
   
     <link rel="top" title="cetbuildtools2 0.1.0 documentation" href="../index.html"/>
-        <link rel="next" title="FindBoost" href="../find-modules/FindBoost.html"/>
-        <link rel="prev" title="CetUninstallTarget" href="CetUninstallTarget.html"/> 
+        <link rel="next" title="CetCompilerSettings" href="CetCompilerSettings.html"/>
+        <link rel="prev" title="Introduction to cetbuildtools2" href="introduction.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -74,9 +74,9 @@
               <p class="caption"><span class="caption-text">Using cetbuildtools2</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to cetbuildtools2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CetCMakeSettings.html">CetCMakeSettings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="CetCMakeSettings.html#general-build-settings">General Build Settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CetCMakeSettings.html#ctest-testing-settings">CTest/Testing Settings</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">CetCMakeSettings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-build-settings">General Build Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ctest-testing-settings">CTest/Testing Settings</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="CetCompilerSettings.html">CetCompilerSettings</a><ul>
@@ -97,7 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="CetTest.html">CetTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CetCMakeUtilities.html">CetCMakeUtilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CetUninstallTarget.html">CetUninstallTarget</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">CetWriteCXXVersionAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetWriteCXXVersionAPI.html">CetWriteCXXVersionAPI</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Additional Find Modules</span></p>
 <ul>
@@ -143,11 +143,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>CetWriteCXXVersionAPI</li>
+    <li>CetCMakeSettings</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/users/CetWriteCXXVersionAPI.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/users/CetCMakeSettings.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -156,54 +156,77 @@
 </div>
           <div role="main" class="document">
             
-  <div class="section" id="cetwritecxxversionapi">
-<h1>CetWriteCXXVersionAPI<a class="headerlink" href="#cetwritecxxversionapi" title="Permalink to this headline">¶</a></h1>
-<dl class="command">
-<dt id="command:cet_write_cxx_version_api">
-<code class="descname">cet_write_cxx_version_api</code><a class="headerlink" href="#command:cet_write_cxx_version_api" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cet_write_cxx_version_api</span><span class="p">(</span><span class="s">NAMESPACE</span>      <span class="s">&lt;ns&gt;</span>
-                          <span class="s">TYPENAME</span>       <span class="s">&lt;type&gt;</span>
-                          <span class="s">[HEADER_FILE</span>   <span class="s">&lt;path&gt;]</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Write C++ header and source files defining a compile and runtime
-API for reporting and checking project version numbers following
-MAJOR.MINOR.PATCH style versioning.</p>
-<p>Identifiers for the C++ namespace and struct holding the API as member
-functions must be specified using the <code class="docutils literal"><span class="pre">NAMESPACE</span></code> and <code class="docutils literal"><span class="pre">TYPENAME</span></code>
-arguments. <code class="docutils literal"><span class="pre">NAMESPACE</span></code> may be as many levels deep as you require.
-For example, setting <code class="docutils literal"><span class="pre">NAMESPACE</span></code> to &#8220;Foo::Bar&#8221; and <code class="docutils literal"><span class="pre">TYPENAME</span></code>
-to &#8220;Version&#8221; constructs a forward declaration and struct definition:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="k">namespace</span> <span class="n">Foo</span> <span class="p">{</span>
-  <span class="k">namespace</span> <span class="n">Bar</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">Version</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">struct</span> <span class="n">Foo</span><span class="o">::</span><span class="n">Bar</span><span class="o">::</span><span class="n">Version</span> <span class="p">{</span>
-  <span class="c1">// functions</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-<p>By default the header and source file are output in the current binary
-directory and named &#8220;<code class="docutils literal"><span class="pre">&lt;type&gt;.h</span></code>&#8221; and &#8220;<code class="docutils literal"><span class="pre">&lt;type&gt;.cc</span></code>&#8221;. This may be modified
-using the <code class="docutils literal"><span class="pre">HEADER_FILE</span></code> argument, supplying <code class="docutils literal"><span class="pre">&lt;path&gt;</span></code> as the required
-output location and name (including extension) of the header. The resultant
-source file will be output alongside the header with the same name plus
-an additional <code class="docutils literal"><span class="pre">.cc</span></code> extension. If <code class="docutils literal"><span class="pre">&lt;path&gt;</span></code> is supplied as a relative
-path, it is evaluated relative to the current binary directory.</p>
-<p>Version component values are taken from the CMake variables
-<code class="docutils literal"><span class="pre">&lt;PROJECT_NAME&gt;_VERSION_MAJOR</span></code>, <code class="docutils literal"><span class="pre">&lt;PROJECT_NAME&gt;_VERSION_MINOR</span></code> and
-<code class="docutils literal"><span class="pre">&lt;PROJECT_NAME&gt;_VERSION_PATCH</span></code> are used. A FATAL_ERROR is raised
-if any of these is not defined. If the variable is defined but empty,
-the version component is taken as 0.</p>
-<p>The header file macros, struct and member functions are documented
-using Doxygen style markup.</p>
-<p>The generated source file includes the header file using an absolute
-path, so it can be compiled into a target without additional setting
-of include directories of compile definitions.</p>
+  <div class="section" id="cetcmakesettings">
+<h1>CetCMakeSettings<a class="headerlink" href="#cetcmakesettings" title="Permalink to this headline">¶</a></h1>
+<p>Set defaults for CMake build settings as useful or required for
+building CET projects. Where appropriate, these settings may be
+changed via command line arguments to cmake or through ccmake/cmake-gui
+interfaces.</p>
+<div class="section" id="general-build-settings">
+<h2>General Build Settings<a class="headerlink" href="#general-build-settings" title="Permalink to this headline">¶</a></h2>
+<p>The following CMake variables and options are configured by default
+when including this module:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE</span></code> : ON<ul>
+<li>Force project directories to appear first in any list of include paths.
+This applies to both full paths and those created by generator expressions.</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION</span></code> : ON<ul>
+<li>CET policy is to install fully relocatable packages, so install
+directories should never be absolute. NB: This does not guarantee
+that a package <em>is</em> relocatable.</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">CMAKE_INSTALL_MESSAGE</span></code> : <code class="docutils literal"><span class="pre">LAZY</span></code><ul>
+<li>Only report new or updated files installed by the <code class="docutils literal"><span class="pre">install</span></code> target.</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">CMAKE_EXPORT_NO_PACKAGE_REGISTRY</span></code> : ON</li>
+<li><code class="docutils literal"><span class="pre">CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY</span></code> : ON</li>
+<li><code class="docutils literal"><span class="pre">CMAKE_FIND_PACKAGE_NO_SYSTEM_PACKAGE_REGISTRY</span></code> : ON<ul>
+<li>These variables are set to ensure that a project never creates or searches
+for config files in any package registry. This prevents the
+<span class="target" id="index-0-command:cmake:command:find_package"></span><a class="reference external" href="https://cmake.org/cmake/help/latest/command/find_package.html#command:find_package" title="(in CMake v3.5.1)"><code class="xref cmake cmake-command docutils literal"><span class="pre">find_package</span></code></a>
+command from locating potentially spurious config files.</li>
+</ul>
+</li>
+</ul>
+<p>In addition to the base setting above, configurable options are provided for
+enabling/disabling extra targets and functionality:</p>
+<dl class="variable">
+<dt id="variable:CET_BUILD_NO_UNINSTALL_TARGET">
+<code class="descname">CET_BUILD_NO_UNINSTALL_TARGET</code><a class="headerlink" href="#variable:CET_BUILD_NO_UNINSTALL_TARGET" title="Permalink to this definition">¶</a></dt>
+<dd><p>Option to disable creation of an <code class="docutils literal"><span class="pre">uninstall</span></code> target for the project.
+<code class="docutils literal"><span class="pre">OFF</span></code> by default, and marked as advanced.</p>
+<p>See the documentation of the <code class="docutils literal"><span class="pre">CetUninstallTarget</span></code>
+module for more details on what this target does.</p>
 </dd></dl>
 
+</div>
+<div class="section" id="ctest-testing-settings">
+<h2>CTest/Testing Settings<a class="headerlink" href="#ctest-testing-settings" title="Permalink to this headline">¶</a></h2>
+<dl class="variable">
+<dt id="variable:BUILD_TESTING">
+<code class="descname">BUILD_TESTING</code><a class="headerlink" href="#variable:BUILD_TESTING" title="Permalink to this definition">¶</a></dt>
+<dd><p>Option to enable test infrastructure and settings, <code class="docutils literal"><span class="pre">ON</span></code> by default.
+After inclusion of this module, use CMake conditionals on <code class="docutils literal"><span class="pre">BUILD_TESTING</span></code> like</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">if</span><span class="p">(</span><span class="s">BUILD_TESTING</span><span class="p">)</span>
+  <span class="c"># ... code to create/build/configure tests ...</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>to only build/define tests when the variable is set.</p>
+<p>At present, enabling testing only supports direct testing rather than
+use of the <span class="target" id="index-0-module:cmake:module:CTest"></span><a class="reference external" href="https://cmake.org/cmake/help/latest/module/CTest.html#module:CTest" title="(in CMake v3.5.1)"><code class="xref cmake cmake-module docutils literal"><span class="pre">CTest</span></code></a> module.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Add support for CTest. Should be matter of checking for
+a <cite>CTestConfig.cmake</cite> file in the project source dir.</p>
+</div>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -212,10 +235,10 @@ of include directories of compile definitions.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../find-modules/FindBoost.html" class="btn btn-neutral float-right" title="FindBoost" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="CetCompilerSettings.html" class="btn btn-neutral float-right" title="CetCompilerSettings" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="CetUninstallTarget.html" class="btn btn-neutral" title="CetUninstallTarget" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="introduction.html" class="btn btn-neutral" title="Introduction to cetbuildtools2" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

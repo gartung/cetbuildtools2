@@ -31,11 +31,11 @@
 
   
     <link rel="top" title="cetbuildtools2 0.1.0 documentation" href="../index.html"/>
-        <link rel="next" title="CetCompilerSettings" href="CetCompilerSettings.html"/>
-        <link rel="prev" title="CetCMakeUtilities" href="CetCMakeUtilities.html"/> 
+        <link rel="next" title="CetTest" href="CetTest.html"/>
+        <link rel="prev" title="CetCompilerSettings" href="CetCompilerSettings.html"/> 
 
   
-  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -45,27 +45,17 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
+      <div class="wy-side-nav-search">
+        
 
-          
-            <a href="../index.html" class="icon icon-home"> cetbuildtools2
-          
+        
+          <a href="../index.html" class="icon icon-home"> cetbuildtools2
+        
 
-          
-          </a>
+        
+        </a>
 
-          
-            
-            
-              <div class="version">
-                0.1.0
-              </div>
-            
-          
-
-          
+        
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -74,36 +64,67 @@
   </form>
 </div>
 
-          
-        </div>
+        
+      </div>
 
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
           
-            
-            
-                <p class="caption"><span class="caption-text">Using cetbuildtools2</span></p>
+          
+              <p class="caption"><span class="caption-text">Using cetbuildtools2</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to cetbuildtools2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CetCMakeUtilities.html">CetCMakeUtilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetCMakeSettings.html">CetCMakeSettings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CetCMakeSettings.html#general-build-settings">General Build Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCMakeSettings.html#ctest-testing-settings">CTest/Testing Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CetCompilerSettings.html">CetCompilerSettings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#cet-base-compiler-flags-and-build-types">CET Base Compiler Flags and Build Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#options-for-controlling-compiler-warnings">Options for Controlling Compiler Warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#options-for-controlling-debugging-output">Options for Controlling Debugging Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#options-for-controlling-symbol-resolution">Options for Controlling Symbol Resolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#architecture-level-optimizations">Architecture Level Optimizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCompilerSettings.html#assertion-management">Assertion Management</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">CetInstallDirs</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#result-variables">Result Variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-hierarchy-policies">Install Hierarchy Policies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-build-directory-functions">Install/Build Directory Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CetCompilerSettings.html">CetCompilerSettings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetTest.html">CetTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetCMakeUtilities.html">CetCMakeUtilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetUninstallTarget.html">CetUninstallTarget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CetWriteCXXVersionAPI.html">CetWriteCXXVersionAPI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Additional Find Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../find-modules/FindBoost.html">FindBoost</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindBoost.html#boost-cmake">Boost CMake</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../find-modules/FindSQLite.html">FindSQLite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindSQLite.html#imported-targets">Imported Targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindSQLite.html#result-variables">Result Variables</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Developing cetbuildtools2</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../developers/cmakeguide.html">CMake Coding Conventions for cetbuildtools2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developers/cmakedocs.html">Documenting CMake Modules and other Constructs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/cmakedocs.html">Documenting CMake Modules and other Constructs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers/cmakedocs.html#documenting-a-module">Documenting a Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers/cmakedocs.html#keeping-section-levels-consistent">Keeping Section Levels Consistent</a></li>
+</ul>
+</li>
 </ul>
 
-            
           
-        </div>
+        
       </div>
+      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -118,13 +139,7 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
+          <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
@@ -139,12 +154,11 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+          <div role="main" class="document">
             
   <div class="section" id="cetinstalldirs">
 <h1>CetInstallDirs<a class="headerlink" href="#cetinstalldirs" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">CetInstallDirs</span><span class="p">)</span>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">include</span><span class="p">(</span><span class="s">CetInstallDirs</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Define GNU/UPS standard and CET project installation directories</p>
@@ -171,7 +185,7 @@ value.  If the value is not already an absolute path, an absolute path
 is constructed typically by prepending the value of the
 <span class="target" id="index-0-variable:CMAKE_INSTALL_PREFIX"></span><code class="xref cmake cmake-variable docutils literal"><span class="pre">CMAKE_INSTALL_PREFIX</span></code> variable.</div></blockquote>
 <p>where <code class="docutils literal"><span class="pre">&lt;dir&gt;</span></code> is one of the values as defined in the
-<span class="target" id="index-0-module:cmake:module:GNUInstallDirs"></span><a class="reference external" href="https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html#module:GNUInstallDirs" title="(in CMake v3.5.0)"><code class="xref cmake cmake-module docutils literal"><span class="pre">GNUInstallDirs</span> <span class="pre">module</span></code></a>,
+<span class="target" id="index-0-module:cmake:module:GNUInstallDirs"></span><a class="reference external" href="https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html#module:GNUInstallDirs" title="(in CMake v3.5.1)"><code class="xref cmake cmake-module docutils literal"><span class="pre">GNUInstallDirs</span> <span class="pre">module</span></code></a>,
 plus the CET extensions</p>
 <dl class="docutils">
 <dt><code class="docutils literal"><span class="pre">CMAKEDIR</span></code></dt>
@@ -189,7 +203,7 @@ after inclusion of this module.</p>
 <div class="section" id="install-hierarchy-policies">
 <h2>Install Hierarchy Policies<a class="headerlink" href="#install-hierarchy-policies" title="Permalink to this headline">¶</a></h2>
 <p>By default, the GNU install policy is used. All <code class="docutils literal"><span class="pre">CMAKE_INSTALL_&lt;dir&gt;</span></code>
-variables will have the defaults as defined in <span class="target" id="index-1-module:cmake:module:GNUInstallDirs"></span><a class="reference external" href="https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html#module:GNUInstallDirs" title="(in CMake v3.5.0)"><code class="xref cmake cmake-module docutils literal"><span class="pre">GNUInstallDirs</span></code></a>
+variables will have the defaults as defined in <span class="target" id="index-1-module:cmake:module:GNUInstallDirs"></span><a class="reference external" href="https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html#module:GNUInstallDirs" title="(in CMake v3.5.1)"><code class="xref cmake cmake-module docutils literal"><span class="pre">GNUInstallDirs</span></code></a>
 and may be set on the command line on in the CMake interactive dialogs.</p>
 <div class="admonition-todo admonition" id="index-0">
 <p class="first admonition-title">Todo</p>
@@ -203,15 +217,15 @@ install and build output directories</p>
 <dl class="command">
 <dt id="command:cet_set_output_directories">
 <code class="descname">cet_set_output_directories</code><a class="headerlink" href="#command:cet_set_output_directories" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cet_set_output_directories</span><span class="p">()</span>
+<dd><div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cet_set_output_directories</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><span class="target" id="index-0-command:cmake:command:function"></span><a class="reference external" href="https://cmake.org/cmake/help/latest/command/function.html#command:function" title="(in CMake v3.5.0)"><code class="xref cmake cmake-command docutils literal"><span class="pre">Function</span></code></a> that sets the
+<p><span class="target" id="index-0-command:cmake:command:function"></span><a class="reference external" href="https://cmake.org/cmake/help/latest/command/function.html#command:function" title="(in CMake v3.5.1)"><code class="xref cmake cmake-command docutils literal"><span class="pre">Function</span></code></a> that sets the
 values of the default output directories for CMake targets to
 match to the install hierarchy.</p>
 <p>For single mode build generators (make, ninja), the following
 hierarchy is used:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">+- &lt;PROJECT_BINARY_DIR&gt;/</span>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">+- &lt;PROJECT_BINARY_DIR&gt;/</span>
 <span class="go">   +- BuildProducts/</span>
 <span class="go">      +- &lt;CMAKE_INSTALL_BINDIR&gt;/</span>
 <span class="go">         +- ... &quot;runtime&quot; targets ...</span>
@@ -221,7 +235,7 @@ hierarchy is used:</p>
 </div>
 <p>For multimode build generators (Xcode, Visual Studio), each mode
 is separated using the hierarchy</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">+- &lt;PROJECT_BINARY_DIR&gt;</span>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">+- &lt;PROJECT_BINARY_DIR&gt;</span>
 <span class="go">   +- BuildProducts/</span>
 <span class="go">      +- &lt;CONFIG&gt;/</span>
 <span class="go">         +- &lt;CMAKE_INSTALL_BINDIR&gt;/</span>
@@ -232,7 +246,7 @@ is separated using the hierarchy</p>
 </pre></div>
 </div>
 <p>where <code class="docutils literal"><span class="pre">&lt;CONFIG&gt;</span></code> is repeated for each build configuration listed in
-<span class="target" id="index-0-variable:cmake:variable:CMAKE_CONFIGURATION_TYPES"></span><a class="reference external" href="https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html#variable:CMAKE_CONFIGURATION_TYPES" title="(in CMake v3.5.0)"><code class="xref cmake cmake-variable docutils literal"><span class="pre">CMAKE_CONFIGURATION_TYPES</span></code></a>, e.g. Release, Debug, RelWithDebInfo etc.
+<span class="target" id="index-0-variable:cmake:variable:CMAKE_CONFIGURATION_TYPES"></span><a class="reference external" href="https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html#variable:CMAKE_CONFIGURATION_TYPES" title="(in CMake v3.5.1)"><code class="xref cmake cmake-variable docutils literal"><span class="pre">CMAKE_CONFIGURATION_TYPES</span></code></a>, e.g. Release, Debug, RelWithDebInfo etc.
 Currently always called by inclusion of the <code class="docutils literal"><span class="pre">CetInstallDirs</span></code>
 module.</p>
 <div class="admonition-todo admonition" id="index-1">
@@ -245,16 +259,15 @@ module.</p>
 </div>
 
 
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="CetCompilerSettings.html" class="btn btn-neutral float-right" title="CetCompilerSettings" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="CetTest.html" class="btn btn-neutral float-right" title="CetTest" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="CetCMakeUtilities.html" class="btn btn-neutral" title="CetCMakeUtilities" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="CetCompilerSettings.html" class="btn btn-neutral" title="CetCompilerSettings" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -264,10 +277,9 @@ module.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Ben Morgan.
-
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
 </footer>
 

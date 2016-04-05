@@ -1,15 +1,26 @@
 .. include:: ../README.rst
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :hidden:
    :caption: Using cetbuildtools2
 
    /users/introduction
-   /users/CetCMakeUtilities
-   /users/CetInstallDirs
+   /users/CetCMakeSettings
    /users/CetCompilerSettings
+   /users/CetInstallDirs
+   /users/CetTest
+   /users/CetCMakeUtilities
+   /users/CetUninstallTarget
    /users/CetWriteCXXVersionAPI
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: Additional Find Modules
+
+   /find-modules/FindBoost
+   /find-modules/FindSQLite
 
 .. toctree::
    :maxdepth: 2

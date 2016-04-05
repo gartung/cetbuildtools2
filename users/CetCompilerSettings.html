@@ -31,11 +31,11 @@
 
   
     <link rel="top" title="cetbuildtools2 0.1.0 documentation" href="../index.html"/>
-        <link rel="next" title="CetWriteCXXVersionAPI" href="CetWriteCXXVersionAPI.html"/>
-        <link rel="prev" title="CetInstallDirs" href="CetInstallDirs.html"/> 
+        <link rel="next" title="CetInstallDirs" href="CetInstallDirs.html"/>
+        <link rel="prev" title="CetCMakeSettings" href="CetCMakeSettings.html"/> 
 
   
-  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -45,27 +45,17 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
+      <div class="wy-side-nav-search">
+        
 
-          
-            <a href="../index.html" class="icon icon-home"> cetbuildtools2
-          
+        
+          <a href="../index.html" class="icon icon-home"> cetbuildtools2
+        
 
-          
-          </a>
+        
+        </a>
 
-          
-            
-            
-              <div class="version">
-                0.1.0
-              </div>
-            
-          
-
-          
+        
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -74,20 +64,23 @@
   </form>
 </div>
 
-          
-        </div>
+        
+      </div>
 
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
           
-            
-            
-                <p class="caption"><span class="caption-text">Using cetbuildtools2</span></p>
+          
+              <p class="caption"><span class="caption-text">Using cetbuildtools2</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to cetbuildtools2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CetCMakeUtilities.html">CetCMakeUtilities</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CetInstallDirs.html">CetInstallDirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetCMakeSettings.html">CetCMakeSettings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CetCMakeSettings.html#general-build-settings">General Build Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetCMakeSettings.html#ctest-testing-settings">CTest/Testing Settings</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">CetCompilerSettings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#cet-build-types-and-compiler-flags">CET Build Types and Compiler Flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cet-base-compiler-flags-and-build-types">CET Base Compiler Flags and Build Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#options-for-controlling-compiler-warnings">Options for Controlling Compiler Warnings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#options-for-controlling-debugging-output">Options for Controlling Debugging Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#options-for-controlling-symbol-resolution">Options for Controlling Symbol Resolution</a></li>
@@ -95,18 +88,43 @@
 <li class="toctree-l2"><a class="reference internal" href="#assertion-management">Assertion Management</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="CetInstallDirs.html">CetInstallDirs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CetInstallDirs.html#result-variables">Result Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetInstallDirs.html#install-hierarchy-policies">Install Hierarchy Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CetInstallDirs.html#install-build-directory-functions">Install/Build Directory Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CetTest.html">CetTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetCMakeUtilities.html">CetCMakeUtilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetUninstallTarget.html">CetUninstallTarget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CetWriteCXXVersionAPI.html">CetWriteCXXVersionAPI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Additional Find Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../find-modules/FindBoost.html">FindBoost</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindBoost.html#boost-cmake">Boost CMake</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../find-modules/FindSQLite.html">FindSQLite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindSQLite.html#imported-targets">Imported Targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../find-modules/FindSQLite.html#result-variables">Result Variables</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Developing cetbuildtools2</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../developers/cmakeguide.html">CMake Coding Conventions for cetbuildtools2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developers/cmakedocs.html">Documenting CMake Modules and other Constructs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/cmakedocs.html">Documenting CMake Modules and other Constructs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers/cmakedocs.html#documenting-a-module">Documenting a Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developers/cmakedocs.html#keeping-section-levels-consistent">Keeping Section Levels Consistent</a></li>
+</ul>
+</li>
 </ul>
 
-            
           
-        </div>
+        
       </div>
+      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -121,13 +139,7 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
+          <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
@@ -142,12 +154,11 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+          <div role="main" class="document">
             
   <div class="section" id="cetcompilersettings">
 <h1>CetCompilerSettings<a class="headerlink" href="#cetcompilersettings" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">CetCompilerSettings</span><span class="p">)</span>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">include</span><span class="p">(</span><span class="s">CetCompilerSettings</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Sets CET Build Modes and Compiler Flags when included.</p>
@@ -155,9 +166,15 @@
 build modes and C/C++/Fortran compiler flags. CMake options and functions
 are provided to manage warning levels, debugging format, symbol resolution
 policy, architecture level optimization and assertion activation.</p>
-<div class="section" id="cet-build-types-and-compiler-flags">
-<h2>CET Build Types and Compiler Flags<a class="headerlink" href="#cet-build-types-and-compiler-flags" title="Permalink to this headline">¶</a></h2>
-<p>CET uses the same build modes as vanilla CMake:</p>
+<div class="section" id="cet-base-compiler-flags-and-build-types">
+<h2>CET Base Compiler Flags and Build Types<a class="headerlink" href="#cet-base-compiler-flags-and-build-types" title="Permalink to this headline">¶</a></h2>
+<p>Base flags for a language, that is <code class="docutils literal"><span class="pre">CMAKE_&lt;LANG&gt;_FLAGS</span></code> are always
+set by prepending any required to the existing value of the <code class="docutils literal"><span class="pre">CMAKE_&lt;LANG&gt;_FLAGS</span></code>
+variable. This enables a project or environment to override or extend
+flags by setting <code class="docutils literal"><span class="pre">CMAKE_&lt;LANG&gt;_FLAGS</span></code> in their own CMake scripts before
+including this module.</p>
+<p>Additional flags are added depending on the build mode being used,
+and CET uses the same set as defined by vanilla CMake:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">None</span></code>: Base language flags only</li>
 <li><code class="docutils literal"><span class="pre">Release</span></code>: Highest optimization possible, debugging information</li>
@@ -165,7 +182,8 @@ policy, architecture level optimization and assertion activation.</p>
 <li><code class="docutils literal"><span class="pre">MinSizeRel</span></code>: Highest optimization possible, debugging information plus frame pointer</li>
 <li><code class="docutils literal"><span class="pre">RelWithDebInfo</span></code>: Moderate optimization, debugging info</li>
 </ul>
-<p>For the GNU, Clang and Intel C/C++ compilers, these correspond to</p>
+<p>For the GNU, Clang and Intel C/C++ compilers, these correspond to
+flags for optimization and debugging of:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">Release</span></code>: <code class="docutils literal"><span class="pre">-O3</span> <span class="pre">-g</span></code></li>
 <li><code class="docutils literal"><span class="pre">Debug</span></code>: <code class="docutils literal"><span class="pre">-O0</span> <span class="pre">-g</span></code></li>
@@ -178,18 +196,47 @@ set.</p>
 </div>
 <div class="section" id="options-for-controlling-compiler-warnings">
 <h2>Options for Controlling Compiler Warnings<a class="headerlink" href="#options-for-controlling-compiler-warnings" title="Permalink to this headline">¶</a></h2>
-<p>The warnings checked for by the compiler are defined in CET by four
-levels:</p>
+<dl class="variable">
+<dt id="variable:CET_COMPILER_DIAGNOSTIC_LEVEL">
+<code class="descname">CET_COMPILER_DIAGNOSTIC_LEVEL</code><a class="headerlink" href="#variable:CET_COMPILER_DIAGNOSTIC_LEVEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Option to select the level of compiler diagnostics to add to flags.
+The warnings checked for by the compiler are defined in CET by four
+levels, with the following flags prepended to <code class="docutils literal"><span class="pre">CMAKE_C_FLAGS</span></code> and <code class="docutils literal"><span class="pre">CMAKE_CXX_FLAGS</span></code>.
+At present, diagnostic selection is only enabled for C and C++ languages
+and when using the GNU, Clang or Intel compilers.</p>
 <ul class="simple">
-<li>cavalier</li>
-<li>cautious (default?)</li>
-<li>vigilant</li>
-<li>paranoid</li>
+<li><code class="docutils literal"><span class="pre">CAVALIER</span></code><ul>
+<li>No additional flags added for any compiler</li>
 </ul>
+</li>
+<li><code class="docutils literal"><span class="pre">CAUTIOUS</span></code> (default)<ul>
+<li>All <code class="docutils literal"><span class="pre">CAVALIER</span></code> flags for the compiler in use, plus</li>
+<li>GNU/Intel compilers: <code class="docutils literal"><span class="pre">-Wall</span> <span class="pre">-Werror=return-type</span></code></li>
+<li>Clang compilers: <code class="docutils literal"><span class="pre">-Wall</span> <span class="pre">-Werror=return-type</span> <span class="pre">-Wno-mismatched-tags</span> <span class="pre">-Wno-missing-braces</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">VIGILANT</span></code><ul>
+<li>All <code class="docutils literal"><span class="pre">CAUTIOUS</span></code> flags for the compiler in use, plus</li>
+<li>GNU/Clang compilers: <code class="docutils literal"><span class="pre">-Wextra</span> <span class="pre">-Wno-long-long</span> <span class="pre">-Winit-self</span> <span class="pre">-Wno-unused-local-typedefs</span></code></li>
+<li>Intel compilers: <code class="docutils literal"><span class="pre">-Wextra</span> <span class="pre">-Wno-long-long</span> <span class="pre">-Winit-self</span></code></li>
+<li>GNU/Clang/Intel C++ compilers also add: <code class="docutils literal"><span class="pre">-Woverloaded-virtual</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">PARANOID</span></code><ul>
+<li>All <code class="docutils literal"><span class="pre">VIGILANT</span></code> flags for the compiler in use, plus</li>
+<li>GNU/Clang/Intel compilers: <code class="docutils literal"><span class="pre">-pedantic</span> <span class="pre">-Wformat-y2k</span> <span class="pre">-Wswitch-default</span> <span class="pre">-Wsync-nand</span> <span class="pre">-Wtrampolines</span> <span class="pre">-Wlogical-op</span> <span class="pre">-Wshadow</span> <span class="pre">-Wcast-qual</span></code></li>
+<li>NB: these are known to be GNU specific at present, but are retained until
+a good set for each compiler can be developed.</li>
+</ul>
+</li>
+</ul>
+</dd></dl>
+
 </div>
 <div class="section" id="options-for-controlling-debugging-output">
 <h2>Options for Controlling Debugging Output<a class="headerlink" href="#options-for-controlling-debugging-output" title="Permalink to this headline">¶</a></h2>
-<p>For compatible compilers, the DWARF debugging standard can be defined</p>
+<p>For compatible compilers, the version and strictness of DWARF
+debugging output may be controlled</p>
 </div>
 <div class="section" id="options-for-controlling-symbol-resolution">
 <h2>Options for Controlling Symbol Resolution<a class="headerlink" href="#options-for-controlling-symbol-resolution" title="Permalink to this headline">¶</a></h2>
@@ -214,7 +261,7 @@ MinSizeRel build types.</p>
 <dl class="command">
 <dt id="command:cet_default_asserts">
 <code class="descname">cet_default_asserts</code><a class="headerlink" href="#command:cet_default_asserts" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cet_default_asserts</span><span class="p">(</span><span class="s">[DIRECTORY</span> <span class="s">&lt;dir&gt;]</span><span class="p">)</span>
+<dd><div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cet_default_asserts</span><span class="p">(</span><span class="s">[DIRECTORY</span> <span class="s">&lt;dir&gt;]</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Disable assertions (i.e. pass <code class="docutils literal"><span class="pre">NDEBUG</span></code> as a preprocessor define) for
@@ -227,7 +274,7 @@ build modes in <code class="docutils literal"><span class="pre">&lt;dir&gt;</spa
 <dl class="command">
 <dt id="command:cet_enable_asserts">
 <code class="descname">cet_enable_asserts</code><a class="headerlink" href="#command:cet_enable_asserts" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cet_enable_asserts</span><span class="p">(</span><span class="s">[DIRECTORY</span> <span class="s">&lt;dir&gt;]</span><span class="p">)</span>
+<dd><div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cet_enable_asserts</span><span class="p">(</span><span class="s">[DIRECTORY</span> <span class="s">&lt;dir&gt;]</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Enable assertions (i.e. do not pass <code class="docutils literal"><span class="pre">NDEBUG</span></code> as a preprocessor define) for
@@ -240,7 +287,7 @@ and all its children.</p>
 <dl class="command">
 <dt id="command:cet_disable_asserts">
 <code class="descname">cet_disable_asserts</code><a class="headerlink" href="#command:cet_disable_asserts" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cet_disable_asserts</span><span class="p">(</span><span class="s">[DIRECTORY</span> <span class="s">&lt;dir&gt;]</span><span class="p">)</span>
+<dd><div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cet_disable_asserts</span><span class="p">(</span><span class="s">[DIRECTORY</span> <span class="s">&lt;dir&gt;]</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Disable assertions (i.e. pass <code class="docutils literal"><span class="pre">NDEBUG</span></code> as a preprocessor define) for
@@ -254,16 +301,15 @@ and all its children.</p>
 </div>
 
 
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="CetWriteCXXVersionAPI.html" class="btn btn-neutral float-right" title="CetWriteCXXVersionAPI" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="CetInstallDirs.html" class="btn btn-neutral float-right" title="CetInstallDirs" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="CetInstallDirs.html" class="btn btn-neutral" title="CetInstallDirs" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="CetCMakeSettings.html" class="btn btn-neutral" title="CetCMakeSettings" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -273,10 +319,9 @@ and all its children.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Ben Morgan.
-
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
 </footer>
 
