@@ -17,6 +17,15 @@ enable_testing()
 add_subdirectory(testing)
 
 # - Install CMake files/modules
+# - Programs
+install(DIRECTORY bin/
+  DESTINATION "${CMAKE_INSTALL_BINDIR}"
+  PATTERN "bin/*"
+  PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+              GROUP_EXECUTE GROUP_READ
+              WORLD_EXECUTE WORLD_READ
+  )
+
 # - Modules
 install(DIRECTORY Modules
   DESTINATION "${CMAKE_INSTALL_CMAKEDIR}"
