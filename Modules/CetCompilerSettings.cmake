@@ -114,10 +114,20 @@ enum_option(CET_COMPILER_DIAGNOSTIC_LEVEL
   DOC "Set warning diagnostic level"
   )
 
-# - Treat warnings as errors
+#.rst:
+# .. cmake:variable:: CET_COMPILER_WARNINGS_ARE_ERRORS
+#
+#  Option to turn compiler warnings into hard errors. ``ON`` by default.
+#
 option(CET_COMPILER_WARNINGS_ARE_ERRORS "treat all warnings as errors" ON)
 
-# - Allow override for deprecations
+#.rst:
+# .. cmake:variable:: CET_COMPILER_ALLOW_DEPRECATIONS
+#
+#   Option to ignore deprecation warnings. ``ON`` by default.
+#   It only has an effect if ``CET_COMPILER_WARNINGS_ARE_ERRORS`` is
+#   activated (this matches upstream `cetbuildtools` behaviour.
+#
 option(CET_COMPILER_ALLOW_DEPRECATIONS "ignore deprecation warnings" ON)
 
 mark_as_advanced(
@@ -184,8 +194,21 @@ endif()
 # For compatible compilers, the version and strictness of DWARF
 # debugging output may be controlled
 #
+# .. cmake:variable:: CET_COMPILER_DWARF_STRICT
+#
+#   Option to only emit DWARF debugging info at the level set by
+#   ``CET_COMPILER_DWARF_VERSION``. ``ON`` by default.
+#
+# .. todo::
+#
+#   Current flags are GCC dependent. Review them for Clang and Intel
+#
 option(CET_COMPILER_DWARF_STRICT "only emit DWARF debugging info at defined level" ON)
-# NB: this is a number, so again an enum option
+
+# .. cmake:variable:: CET_COMPILER_DWARF_VERSION
+#
+#   Version of DWARF standard that should be emitted. Defaults to 2.
+#
 enum_option(CET_COMPILER_DWARF_VERSION
   VALUES 2 3 4
   TYPE STRING
@@ -219,6 +242,11 @@ endforeach()
 # Linkers may have different default policies for symbol resolution.
 # CET prefer to fully resolved symbols.
 #
+# .. cmake:variable:: CET_COMPILER_NO_UNDEFINED_SYMBOLS
+#
+#   Option to control whether the linker must fully resolve symbols for
+#   shared libraries. ``ON`` by default.
+#
 option(CET_COMPILER_NO_UNDEFINED_SYMBOLS "required full symbol resolution for shared libs" ON)
 mark_as_advanced(CET_COMPILER_NO_UNDEFINED_SYMBOLS)
 
@@ -238,7 +266,18 @@ endif()
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #
 # Things like SSE/Vectorization...
-
+#
+# .. cmake:variable:: CET_COMPILER_ENABLE_SSE2
+#
+#   Enable specific optimizations for SSE2. ``OFF`` by default.
+#
+#   Note that this does not check that the system you are building
+#   for supports this instruction set.
+#
+# .. todo::
+#
+#   Review options here for further checks and/or arch-specific optimizations.
+#
 option(CET_COMPILER_ENABLE_SSE2 "enable SSE2 specific optimizations" OFF)
 mark_as_advanced(CET_COMPILER_ENABLE_SSE2)
 
