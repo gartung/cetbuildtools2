@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CetWriteCXXVersionAPI &mdash; cetbuildtools2 0.1.0 documentation</title>
+  <title>CetUPS &mdash; cetbuildtools2 0.1.0 documentation</title>
   
 
   
@@ -31,8 +31,8 @@
 
   
     <link rel="top" title="cetbuildtools2 0.1.0 documentation" href="../index.html"/>
-        <link rel="next" title="FindBoost" href="../find-modules/FindBoost.html"/>
-        <link rel="prev" title="CetUninstallTarget" href="CetUninstallTarget.html"/> 
+        <link rel="next" title="CetCMakeUtilities" href="CetCMakeUtilities.html"/>
+        <link rel="prev" title="CetTest" href="CetTest.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -88,10 +88,15 @@
 <li class="toctree-l1"><a class="reference internal" href="CetCompilerSettings.html">CetCompilerSettings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CetInstallDirs.html">CetInstallDirs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CetTest.html">CetTest</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CetUPS.html">CetUPS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">CetUPS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ups-project-files">UPS Project Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ups-setup-for-development">UPS Setup for Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ups-tools">UPS Tools</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="CetCMakeUtilities.html">CetCMakeUtilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CetUninstallTarget.html">CetUninstallTarget</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">CetWriteCXXVersionAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CetWriteCXXVersionAPI.html">CetWriteCXXVersionAPI</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Additional Find Modules</span></p>
 <ul>
@@ -132,11 +137,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>CetWriteCXXVersionAPI</li>
+    <li>CetUPS</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/users/CetWriteCXXVersionAPI.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/users/CetUPS.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -146,54 +151,55 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="cetwritecxxversionapi">
-<h1>CetWriteCXXVersionAPI<a class="headerlink" href="#cetwritecxxversionapi" title="Permalink to this headline">¶</a></h1>
-<dl class="command">
-<dt id="command:cet_write_cxx_version_api">
-<code class="descname">cet_write_cxx_version_api</code><a class="headerlink" href="#command:cet_write_cxx_version_api" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-cmake"><div class="highlight"><pre><span></span><span class="nb">cet_write_cxx_version_api</span><span class="p">(</span><span class="s">NAMESPACE</span>      <span class="s">&lt;ns&gt;</span>
-                          <span class="s">TYPENAME</span>       <span class="s">&lt;type&gt;</span>
-                          <span class="s">[HEADER_FILE</span>   <span class="s">&lt;path&gt;]</span><span class="p">)</span>
-</pre></div>
+  <div class="section" id="cetups">
+<h1>CetUPS<a class="headerlink" href="#cetups" title="Permalink to this headline">¶</a></h1>
+<p>Configure and develop project using settings obtained from CET&#8217;s
+UPS configuration management tool. These settings override any set
+by the user and cannot be modified. The enforced settings include:</p>
+<ul class="simple">
+<li>Installation locations</li>
+<li>Build type</li>
+</ul>
+<p>In particular, multiconfig tools like Xcode cannot be used in
+UPS builds as UPS only understands single mode builds.</p>
+<div class="section" id="ups-project-files">
+<h2>UPS Project Files<a class="headerlink" href="#ups-project-files" title="Permalink to this headline">¶</a></h2>
+<p>Projects capable of being built in UPS-mode must instrument their
+source directory with a <cite>ups</cite> directory holding a <cite>product_deps</cite>
+file and a <cite>setup_for_development</cite> script.</p>
 </div>
-<p>Write C++ header and source files defining a compile and runtime
-API for reporting and checking project version numbers following
-MAJOR.MINOR.PATCH style versioning.</p>
-<p>Identifiers for the C++ namespace and struct holding the API as member
-functions must be specified using the <code class="docutils literal"><span class="pre">NAMESPACE</span></code> and <code class="docutils literal"><span class="pre">TYPENAME</span></code>
-arguments. <code class="docutils literal"><span class="pre">NAMESPACE</span></code> may be as many levels deep as you require.
-For example, setting <code class="docutils literal"><span class="pre">NAMESPACE</span></code> to &#8220;Foo::Bar&#8221; and <code class="docutils literal"><span class="pre">TYPENAME</span></code>
-to &#8220;Version&#8221; constructs a forward declaration and struct definition:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">Foo</span> <span class="p">{</span>
-  <span class="k">namespace</span> <span class="n">Bar</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">Version</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">struct</span> <span class="n">Foo</span><span class="o">::</span><span class="n">Bar</span><span class="o">::</span><span class="n">Version</span> <span class="p">{</span>
-  <span class="c1">// functions</span>
-<span class="p">};</span>
-</pre></div>
+<div class="section" id="ups-setup-for-development">
+<h2>UPS Setup for Development<a class="headerlink" href="#ups-setup-for-development" title="Permalink to this headline">¶</a></h2>
+<p>The following sequence of operations/scripts is performed (NB,
+may not be complete as yet)</p>
+<ul class="simple">
+<li>It&#8217;s assumed that the <cite>ups</cite> product is already setup<ul>
+<li>Usually indicated by presence of <cite>ups</cite> program in <code class="docutils literal"><span class="pre">PATH</span></code>
+or setting of <code class="docutils literal"><span class="pre">UPS_DIR</span></code> environment variable</li>
+</ul>
+</li>
+<li>User creates build directory, and <code class="docutils literal"><span class="pre">source</span></code> s the <code class="docutils literal"><span class="pre">ups/setup_for_development</span></code>
+script for the project to be built, supplying the build type and
+any further qualifiers</li>
+<li>This script runs the <code class="docutils literal"><span class="pre">set_dev_products</span></code> program that reads the
+<code class="docutils literal"><span class="pre">ups/product_deps</span></code> file and writes two files to the build directory:<ul>
+<li>A shell script, &#8220;product_name-ups_version&#8221; to be sourced by <code class="docutils literal"><span class="pre">setup_for_development</span></code> that
+setups needed products and sets further UPS/cetbuildtools specific
+environment variables.</li>
+<li>A text file, &#8220;cetpkg_variable_support&#8221;, that holds the UPS/cetbuildtools
+variables as KEY VALUE pairs.</li>
+</ul>
+</li>
+<li>User runs CMake using the invocation <code class="docutils literal"><span class="pre">cmake</span> <span class="pre">-DCMAKE_INSTALL_PREFIX=&lt;path&gt;</span> <span class="pre">-DCMAKE_BUILD_TYPE=$CETPKG_TYPE</span> <span class="pre">$CETPKG_SOURCE</span></code>
+where the <code class="docutils literal"><span class="pre">CETPKG_</span></code> variables are those set in the environment by
+the script.</li>
+</ul>
 </div>
-<p>By default the header and source file are output in the current binary
-directory and named &#8220;<code class="docutils literal"><span class="pre">&lt;type&gt;.h</span></code>&#8221; and &#8220;<code class="docutils literal"><span class="pre">&lt;type&gt;.cc</span></code>&#8221;. This may be modified
-using the <code class="docutils literal"><span class="pre">HEADER_FILE</span></code> argument, supplying <code class="docutils literal"><span class="pre">&lt;path&gt;</span></code> as the required
-output location and name (including extension) of the header. The resultant
-source file will be output alongside the header with the same name plus
-an additional <code class="docutils literal"><span class="pre">.cc</span></code> extension. If <code class="docutils literal"><span class="pre">&lt;path&gt;</span></code> is supplied as a relative
-path, it is evaluated relative to the current binary directory.</p>
-<p>Version component values are taken from the CMake variables
-<code class="docutils literal"><span class="pre">&lt;PROJECT_NAME&gt;_VERSION_MAJOR</span></code>, <code class="docutils literal"><span class="pre">&lt;PROJECT_NAME&gt;_VERSION_MINOR</span></code> and
-<code class="docutils literal"><span class="pre">&lt;PROJECT_NAME&gt;_VERSION_PATCH</span></code> are used. A FATAL_ERROR is raised
-if any of these is not defined. If the variable is defined but empty,
-the version component is taken as 0.</p>
-<p>The header file macros, struct and member functions are documented
-using Doxygen style markup.</p>
-<p>The generated source file includes the header file using an absolute
-path, so it can be compiled into a target without additional setting
-of include directories of compile definitions.</p>
-</dd></dl>
-
+<div class="section" id="ups-tools">
+<h2>UPS Tools<a class="headerlink" href="#ups-tools" title="Permalink to this headline">¶</a></h2>
+<p>Several shell/perl scripts are installed by cetbuildtools2 that
+run setup, query the UPS system and generate install-time files</p>
+</div>
 </div>
 
 
@@ -203,10 +209,10 @@ of include directories of compile definitions.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../find-modules/FindBoost.html" class="btn btn-neutral float-right" title="FindBoost" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="CetCMakeUtilities.html" class="btn btn-neutral float-right" title="CetCMakeUtilities" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="CetUninstallTarget.html" class="btn btn-neutral" title="CetUninstallTarget" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="CetTest.html" class="btn btn-neutral" title="CetTest" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -35,7 +35,7 @@
         <link rel="prev" title="FindBoost" href="FindBoost.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -45,17 +45,27 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-        
-          <a href="../index.html" class="icon icon-home"> cetbuildtools2
-        
+          
+            <a href="../index.html" class="icon icon-home"> cetbuildtools2
+          
 
-        
-        </a>
+          
+          </a>
 
-        
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -64,47 +74,28 @@
   </form>
 </div>
 
-        
-      </div>
+          
+        </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-          
-              <p class="caption"><span class="caption-text">Using cetbuildtools2</span></p>
+            
+            
+                <p class="caption"><span class="caption-text">Using cetbuildtools2</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../users/introduction.html">Introduction to cetbuildtools2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../users/CetCMakeSettings.html">CetCMakeSettings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../users/CetCMakeSettings.html#general-build-settings">General Build Settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../users/CetCMakeSettings.html#ctest-testing-settings">CTest/Testing Settings</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../users/CetCompilerSettings.html">CetCompilerSettings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../users/CetCompilerSettings.html#cet-base-compiler-flags-and-build-types">CET Base Compiler Flags and Build Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../users/CetCompilerSettings.html#options-for-controlling-compiler-warnings">Options for Controlling Compiler Warnings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../users/CetCompilerSettings.html#options-for-controlling-debugging-output">Options for Controlling Debugging Output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../users/CetCompilerSettings.html#options-for-controlling-symbol-resolution">Options for Controlling Symbol Resolution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../users/CetCompilerSettings.html#architecture-level-optimizations">Architecture Level Optimizations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../users/CetCompilerSettings.html#assertion-management">Assertion Management</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../users/CetInstallDirs.html">CetInstallDirs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../users/CetInstallDirs.html#result-variables">Result Variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../users/CetInstallDirs.html#install-hierarchy-policies">Install Hierarchy Policies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../users/CetInstallDirs.html#install-build-directory-functions">Install/Build Directory Functions</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../users/CetCMakeSettings.html">CetCMakeSettings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/CetCompilerSettings.html">CetCompilerSettings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/CetInstallDirs.html">CetInstallDirs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../users/CetTest.html">CetTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/CetUPS.html">CetUPS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../users/CetCMakeUtilities.html">CetCMakeUtilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../users/CetUninstallTarget.html">CetUninstallTarget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../users/CetWriteCXXVersionAPI.html">CetWriteCXXVersionAPI</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Additional Find Modules</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="FindBoost.html">FindBoost</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="FindBoost.html#boost-cmake">Boost CMake</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="FindBoost.html">FindBoost</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">FindSQLite</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#imported-targets">Imported Targets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#result-variables">Result Variables</a></li>
@@ -114,17 +105,13 @@
 <p class="caption"><span class="caption-text">Developing cetbuildtools2</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../developers/cmakeguide.html">CMake Coding Conventions for cetbuildtools2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developers/cmakedocs.html">Documenting CMake Modules and other Constructs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../developers/cmakedocs.html#documenting-a-module">Documenting a Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../developers/cmakedocs.html#keeping-section-levels-consistent">Keeping Section Levels Consistent</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/cmakedocs.html">Documenting CMake Modules and other Constructs</a></li>
 </ul>
 
+            
           
-        
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -139,7 +126,13 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
@@ -154,7 +147,8 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="findsqlite">
 <h1>FindSQLite<a class="headerlink" href="#findsqlite" title="Permalink to this headline">¶</a></h1>
@@ -163,7 +157,7 @@
 <h2>Imported Targets<a class="headerlink" href="#imported-targets" title="Permalink to this headline">¶</a></h2>
 <p>If SQLite is found, this module defines the following <span class="target" id="index-0-prop_tgt:IMPORTED"></span><code class="xref cmake cmake-prop_tgt docutils literal"><span class="pre">IMPORTED</span></code>
 targets:</p>
-<div class="highlight-python"><div class="highlight"><pre>SQLite::SQLite           - The main SQLite library
+<div class="highlight-python"><div class="highlight"><pre><span></span>SQLite::SQLite           - The main SQLite library
 SQLite::SQLiteExecutable - The main SQlite program
 </pre></div>
 </div>
@@ -171,7 +165,7 @@ SQLite::SQLiteExecutable - The main SQlite program
 <div class="section" id="result-variables">
 <h2>Result Variables<a class="headerlink" href="#result-variables" title="Permalink to this headline">¶</a></h2>
 <p>This module wil set the following variables in your project:</p>
-<div class="highlight-python"><div class="highlight"><pre>SQLite_FOUND        - True if an install of SQLite is found
+<div class="highlight-python"><div class="highlight"><pre><span></span>SQLite_FOUND        - True if an install of SQLite is found
 SQLite_INCLUDE_DIRS - Location of SQLite header files
 SQLite_LIBRARIES    - The SQLite libraries
 SQLite_EXECUTABLE   - Path to sqlite executable
@@ -182,6 +176,7 @@ SQLite_VERSION      - The version of the found SQLite install
 </div>
 
 
+           </div>
           </div>
           <footer>
   
@@ -200,9 +195,10 @@ SQLite_VERSION      - The version of the found SQLite install
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, Ben Morgan.
+
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
