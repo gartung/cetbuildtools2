@@ -1,5 +1,11 @@
+function(checkclassversion_append_path _path)
+  set_property(GLOBAL
+    APPEND
+    PROPERTY CHECKCLASSVERSION_DYNAMIC_PATH ${_path}
+    )
+endfunction()
+
 INCLUDE(CetParseArgs)
-INCLUDE(CheckUpsVersion)
 
 EXECUTE_PROCESS(COMMAND root-config --has-python
   RESULT_VARIABLE CCV_ROOT_CONFIG_OK

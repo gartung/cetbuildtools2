@@ -244,7 +244,7 @@ function ( build_dictionary )
     #message( STATUS "BUILD_DICTIONARY: installing ${dictname}_dict" )
     install ( TARGETS ${dictname}_dict DESTINATION ${flavorqual_dir}/lib )
     # add to library list for package configure file
-    cet_add_to_library_list( ${dictname}_dict )
+    #cet_add_to_library_list( ${dictname}_dict )
     if (BD_WANT_CAP_FILE)
       install ( TARGETS ${dictname}_map DESTINATION ${flavorqual_dir}/lib )
     endif()
