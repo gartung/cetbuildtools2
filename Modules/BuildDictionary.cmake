@@ -131,7 +131,7 @@ function( _generate_dictionary dictname )
   add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${dictname}_dict.cpp
     ${SOURCE_OUTPUT} ${GD_ROOTMAP_OUTPUT} ${PCM_OUTPUT}
-    COMMAND ${ROOT_GENREFLEX} ${CMAKE_CURRENT_SOURCE_DIR}/classes.h
+    COMMAND ${ROOT_genreflex_CMD} ${CMAKE_CURRENT_SOURCE_DIR}/classes.h
     -s ${CMAKE_CURRENT_SOURCE_DIR}/classes_def.xml
 		-I${CMAKE_SOURCE_DIR}
 		${GENREFLEX_INCLUDES} ${GENREFLEX_FLAGS}
