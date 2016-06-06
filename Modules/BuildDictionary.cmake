@@ -40,6 +40,7 @@
 include(CMakeParseArguments)
 include(CetCurrentSubdir)
 include(CheckClassVersion)
+include(CetMake)
 
 # make sure ROOT_VERSION has been defined
 if( NOT ROOT_VERSION )
