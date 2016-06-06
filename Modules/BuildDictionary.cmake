@@ -40,7 +40,6 @@
 include(CMakeParseArguments)
 include(CetCurrentSubdir)
 include(CheckClassVersion)
-include(CetMake)
 
 # make sure ROOT_VERSION has been defined
 if( NOT ROOT_VERSION )
@@ -247,7 +246,7 @@ function ( build_dictionary )
     #message( STATUS "BUILD_DICTIONARY: installing ${dictname}_dict" )
     install ( TARGETS ${dictname}_dict DESTINATION ${CMAKE_INSTALL_LIBDIR})
     # add to library list for package configure file
-    cet_add_to_library_list( ${dictname}_dict )
+    #cet_add_to_library_list( ${dictname}_dict )
     if (BD_WANT_CAP_FILE)
       install ( TARGETS ${dictname}_map DESTINATION ${CMAKE_INSTALL_LIBDIR})
     endif()
