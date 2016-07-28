@@ -81,13 +81,17 @@ include(CetCMakeUtilities)
 # Basic plugin libraries.
 function(basic_plugin name type)
   cmake_parse_arguments(BP
-    "USE_BOOST_UNIT;ALLOW_UNDERSCORES;BASENAME_ONLY;USE_PRODUCT_NAME;NOP"
+    "USE_BOOST_UNIT;ALLOW_UNDERSCORES;BASENAME_ONLY;USE_PRODUCT_NAME;NOP;NO_INSTALL"
     ""
     "SOURCE"
     ${ARGN})
   if(BP_BASENAME_ONLY AND BP_USE_PRODUCT_NAME)
     message(FATAL_ERROR "BASENAME_ONLY AND USE_PRODUCT_NAME are mutually exclusive")
   endif()
+  if(BP_NO_INSTALL)
+    message(WARNING "basic_plugin no longer accepts the NO_INSTALL option")
+  endif(()
+
   if(BP_BASENAME_ONLY)
     set(plugin_name "${name}_${type}")
   else()
