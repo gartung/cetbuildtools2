@@ -90,7 +90,7 @@ function(basic_plugin name type)
   endif()
   if(BP_NO_INSTALL)
     message(WARNING "basic_plugin no longer accepts the NO_INSTALL option")
-  endif(()
+  endif()
 
   if(BP_BASENAME_ONLY)
     set(plugin_name "${name}_${type}")
