@@ -52,7 +52,7 @@
 # INSTALL_SOURCE
 #   Install this test's source in the source area of the product.
 #
-# Args:
+# Arguments:
 #
 # CONFIGURATIONS
 #   Configurations (Debug, etc, etc) under which the test shall be executed.
@@ -80,19 +80,28 @@
 #
 # REF
 #  The standard output of the test will be captured and compared against
-#  the specified reference file. It is an error to specify this
-#  argument and either the PASS_REGULAR_EXPRESSION or
-#  FAIL_REGULAR_EXPRESSION test properties to the TEST_PROPERTIES
-#  argument: success is the logical AND of the exit code from execution
-#  of the test as originally specified, and the success of the
-#  filtering and subsequent comparison of the output (and optionally,
-#  the error stream). Optionally, a second element may be specified
-#  representing a reference for the error stream; otherwise, standard
-#  error will be ignored.
+#   the specified reference file. It is an error to specify this
+#   argument and either the PASS_REGULAR_EXPRESSION or
+#   FAIL_REGULAR_EXPRESSION test properties to the TEST_PROPERTIES
+#   argument: success is the logical AND of the exit code from execution
+#   of the test as originally specified, and the success of the
+#   filtering and subsequent comparison of the output (and optionally,
+#   the error stream). Optionally, a second element may be specified
+#   representing a reference for the error stream; otherwise, standard
+#   error will be ignored.
 #
-#  If REF is specified, then OUTPUT_FILTER and OUTPUT_FILTER_ARGS may
-#  also be specified. OUTPUT_FILTER must be a program which expects an
-#  input filename as argument and puts the filtered output on STDOUT.
+#  If REF is specified, then OUTPUT_FILTERS may also be specified
+#   (OUTPUT_FILTER and optionally OUTPUT_FILTER_ARGS will be accepted in
+#   the alternative for historical reasons). OUTPUT_FILTER must be a
+#   program which expects input on STDIN and puts the filtered output on
+#   STDOUT. OUTPUT_FILTERS should be a list of filters expecting input
+#   on STDIN and putting output on STDOUT. If DEFAULT is specified as a
+#   filter, it will be replaced at that point in the list of filters by
+#   appropriate defaults. Examples:
+#
+#     OUTPUT_FILTERS "filterA -x -y \"arg with spaces\"" filterB
+#
+#     OUTPUT_FILTERS filterA DEFAULT filterB
 #
 # REQUIRED_FILES
 #   These files are required to be present before the test will be
@@ -308,9 +317,13 @@ function(cet_test CET_TARGET)
   cmake_parse_arguments(CET
     "HANDBUILT;PREBUILT;NO_AUTO;USE_BOOST_UNIT;INSTALL_BIN;INSTALL_EXAMPLE;INSTALL_SOURCE"
     "OUTPUT_FILTER;TEST_EXEC"
-    "CONFIGURATIONS;DATAFILES;DEPENDENCIES;LIBRARIES;OPTIONAL_GROUPS;OUTPUT_FILTER_ARGS;REQUIRED_FILES;SOURCES;TEST_ARGS;TEST_PROPERTIES;REF"
+    "CONFIGURATIONS;DATAFILES;DEPENDENCIES;LIBRARIES;OPTIONAL_GROUPS;OUTPUT_FILTERS;OUTPUT_FILTER_ARGS;REQUIRED_FILES;SOURCES;TEST_ARGS;TEST_PROPERTIES;REF"
     ${ARGN}
     )
+
+  if(CET_OUTPUT_FILTERS AND CET_OUTPUT_FILTER_ARGS)
+    message(FATAL_ERROR "OUTPUT_FILTERS is incompatible with FILTER_ARGS:\nEither use the singular OUTPUT_FILTER or use double-quoted strings in OUTPUT_FILTERS\nE.g. OUTPUT_FILTERS \"filter1 -x -y\" \"filter2 -y -z\"")
+  endif()
 
   # Set up to handle a per-test work directory for parallel testing.
   set(CET_TEST_WORKDIR "${CMAKE_CURRENT_BINARY_DIR}/${CET_TARGET}.d")
@@ -339,7 +352,7 @@ function(cet_test CET_TARGET)
       get_filename_component(dfd ${df} DIRECTORY)
       if(dfd)
         list(APPEND datafiles_tmp ${df})
-      else(dfd)
+      else()
         list(APPEND datafiles_tmp ${CMAKE_CURRENT_SOURCE_DIR}/${df})
       endif()
     endforeach()
@@ -447,19 +460,21 @@ function(cet_test CET_TARGET)
       else()
         list(GET CET_REF 0 OUTPUT_REF)
         list(GET CET_REF 1 ERROR_REF)
-        set(DEF_ERROR_REF "-DTEST_REF_ERR=${ERROR_REF}")
-        set(DEF_TEST_ERR "-DTEST_ERR=${CET_TARGET}.err")
+        set(DEFINE_ERROR_REF "-DTEST_REF_ERR=${ERROR_REF}")
+        set(DEFINE_TEST_ERR "-DTEST_ERR=${CET_TARGET}.err")
       endif()
 
       separate_arguments(TEST_ARGS UNIX_COMMAND "${CET_TEST_ARGS}")
 
       if(CET_OUTPUT_FILTER)
-        set(DEF_OUTPUT_FILTER "-DOUTPUT_FILTER=${CET_OUTPUT_FILTER}")
-      endif()
-
-      if(CET_OUTPUT_FILTER_ARGS)
-        separate_arguments(FILTER_ARGS UNIX_COMMAND "${CET_OUTPUT_FILTER_ARGS}")
-        set(DEF_OUTPUT_FILTER_ARGS "-DOUTPUT_FILTER_ARGS=${FILTER_ARGS}")
+        set(DEFINE_OUTPUT_FILTER "-DOUTPUT_FILTER=${CET_OUTPUT_FILTER}")
+        if(CET_OUTPUT_FILTER_ARGS)
+          separate_arguments(FILTER_ARGS UNIX_COMMAND "${CET_OUTPUT_FILTER_ARGS}")
+          set(DEFINE_OUTPUT_FILTER_ARGS "-DOUTPUT_FILTER_ARGS=${FILTER_ARGS}")
+        endif()
+      elseif(CET_OUTPUT_FILTERS)
+        string(REPLACE ";" "::" DEFINE_OUTPUT_FILTERS "${CET_OUTPUT_FILTERS}")
+        set(DEFINE_OUTPUT_FILTERS "-DOUTPUT_FILTERS=${DEFINE_OUTPUT_FILTERS}")
       endif()
 
       #if(DEFINED ENV{CETBUILDTOOLS_DIR})
@@ -481,10 +496,10 @@ function(cet_test CET_TARGET)
         -DTEST_EXEC=${CET_TEST_EXEC}
         -DTEST_ARGS=${TEST_ARGS}
         -DTEST_REF=${OUTPUT_REF}
-        ${DEF_ERROR_REF}
-        ${DEF_TEST_ERR}
+        ${DEFINE_ERROR_REF}
+        ${DEFINE_TEST_ERR}
         -DTEST_OUT=${CET_TARGET}.out
-        ${DEF_OUTPUT_FILTER} ${DEF_OUTPUT_FILTER_ARGS}
+        ${DEFINE_OUTPUT_FILTER} ${DEFINE_OUTPUT_FILTER_ARGS} ${DEFINE_OUTPUT_FILTERS}
         -P ${COMPARE}
         )
     else()

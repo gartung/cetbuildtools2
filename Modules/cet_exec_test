@@ -570,7 +570,7 @@ if [[ -z "$wd" ]]; then
   echo "Compulsory argument --wd missing." 1>&2
   usage 1
 elif [[ "$(realdir "$wd")" != "$(realdir)" ]]; then
-  echo "$prog must be executed from the working directory for the test invoking $1" 1>&2
+  echo "$prog must be executed from the working directory \"$(realdir "$wd")\" (currently \"$(realdir)\") for the test invoking $1" 1>&2
   usage 1
 fi
 
