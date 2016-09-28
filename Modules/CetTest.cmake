@@ -407,7 +407,7 @@ function(cet_test CET_TARGET)
         endif()
       endforeach()
 
-      target_link_libraries(${CET_TARGET} ${link_lib_list})
+      target_link_libraries(${CET_TARGET} PRIVATE ${link_lib_list})
     endif()
   endif()
 
