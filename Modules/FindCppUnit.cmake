@@ -1,33 +1,60 @@
+#.rst:
+# FindCppUnit
+# -----------
 #
-# http://root.cern.ch/viewvc/trunk/cint/reflex/cmake/modules/FindCppUnit.cmake
+# Find the native CppUnit includes and libraries
 #
-# - Find CppUnit
-# This module finds an installed CppUnit package.
+# Imported Targets
+# ^^^^^^^^^^^^^^^^
 #
-# It sets the following variables:
-# CPPUNIT_FOUND - Set to false, or undefined, if CppUnit isn't found.
-# CPPUNIT_INCLUDE_DIR - The CppUnit include directory.
-# CPPUNIT_LIBRARY - The CppUnit library to link against.
+# If CppUnit is found, this module defines the following :cmake:prop_tgt:`IMPORTED`
+# targets::
+#
+#  CppUnit::CppUnit - The main CppUnit library
+#
+# Result Variables
+# ^^^^^^^^^^^^^^^^
+#
+# This module wil set the following variables in your project::
+#
+#  CPPUNIT_FOUND        - True if an install of SQLite is found
+#  CPPUNIT_INCLUDE_DIRS - Location of SQLite header files
+#  CPPUNIT_LIBRARIES    - The SQLite libraries
+#
+#
 
-FIND_PATH(CPPUNIT_INCLUDE_DIR cppunit/Test.h)
-FIND_LIBRARY(CPPUNIT_LIBRARY NAMES cppunit)
+#=======================================================================
+# Copyright (c) 2016, Ben Morgan <Ben.Morgan@warwick.ac.uk>
+#
+# Distributed under the OSI-approved BSD 3-Clause License (the "License");
+# see accompanying file LICENSE for details.
+#
+# This software is distributed WITHOUT ANY WARRANTY; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the License for more information.
+#=======================================================================
 
-IF (CPPUNIT_INCLUDE_DIR AND CPPUNIT_LIBRARY)
-  SET(CPPUNIT_FOUND TRUE)
-ENDIF (CPPUNIT_INCLUDE_DIR AND CPPUNIT_LIBRARY)
+find_path(CPPUNIT_INCLUDE_DIR cppunit/Test.h)
+find_library(CPPUNIT_LIBRARY NAMES cppunit)
 
-IF (CPPUNIT_FOUND)
+# handle the QUIETLY and REQUIRED arguments and set ZLIB_FOUND to TRUE if
+# all listed variables are TRUE
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(CPPUNIT REQUIRED_VARS CPPUNIT_LIBRARY CPPUNIT_INCLUDE_DIR)
 
-  # show which CppUnit was found only if not quiet
-  IF (NOT CppUnit_FIND_QUIETLY)
-    MESSAGE(STATUS "Found CppUnit: ${CPPUNIT_LIBRARY}")
-  ENDIF (NOT CppUnit_FIND_QUIETLY)
+if(CPPUNIT_FOUND)
+  set(CPPUNIT_INCLUDE_DIRS ${CPPUNIT_INCLUDE_DIR})
 
-ELSE (CPPUNIT_FOUND)
+  if(NOT CPPUNIT_LIBRARIES)
+    set(CPPUNIT_LIBRARIES ${CPPUNIT_LIBRARY})
+  endif()
 
-  # fatal error if CppUnit is required but not found
-  IF (CppUnit_FIND_REQUIRED)
-    MESSAGE(FATAL_ERROR "Could not find CppUnit")
-  ENDIF (CppUnit_FIND_REQUIRED)
+  if(NOT TARGET CppUnit::CppUnit)
+    add_library(CppUnit::CppUnit UNKNOWN IMPORTED)
+    set_target_properties(CppUnit::CppUnit PROPERTIES
+      INTERFACE_INCLUDE_DIRECTORIES "${CPPUNIT_INCLUDE_DIRS}"
+      IMPORTED_LOCATION "${CPPUNIT_LIBRARY}"
+      )
+  endif()
+endif()
 
-ENDIF (CPPUNIT_FOUND)

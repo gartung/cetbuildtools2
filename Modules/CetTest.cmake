@@ -27,13 +27,13 @@
 #
 # HANDBUILT
 #   Do not build the target -- it will be provided. This option is
-#    mutually exclusive with the PREBUILT option.
+#   mutually exclusive with the PREBUILT option.
 #
 # PREBUILT
 #   Do not build the target -- pick it up from the source dir (eg
-#    scripts).  This option is mutually exclusive with the HANDBUILT
-#    option and simply calls the cet_script() function with appropriate
-#    options.
+#   scripts).  This option is mutually exclusive with the HANDBUILT
+#   option and simply calls the cet_script() function with appropriate
+#   options.
 #
 # NO_AUTO
 #   Do not add the target to the auto test list.
@@ -47,37 +47,36 @@
 #
 # INSTALL_EXAMPLE
 #   Install this test and all its data files into the examples area of the
-#    product.
+#   product.
 #
 # INSTALL_SOURCE
 #   Install this test's source in the source area of the product.
 #
-# Args:
+# Arguments:
 #
 # CONFIGURATIONS
-#
 #   Configurations (Debug, etc, etc) under which the test shall be executed.
 #
 # DATAFILES
 #   Input and/or references files to be copied to the test area in the
-#    build tree for use by the test. If there is no path, or a relative
-#    path, the file is assumed to be in or under
-#    ``CMAKE_CURRENT_SOURCE_DIR``.
+#   build tree for use by the test. If there is no path, or a relative
+#   path, the file is assumed to be in or under
+#   ``CMAKE_CURRENT_SOURCE_DIR``.
 #
 # DEPENDENCIES
 #   List of top-level dependencies to consider for a PREBUILT
-#    target. Top-level implies a target (not file) created with
-#    ADD_EXECUTABLE, ADD_LIBRARY or ADD_CUSTOM_TARGET.
+#   target. Top-level implies a target (not file) created with
+#   ADD_EXECUTABLE, ADD_LIBRARY or ADD_CUSTOM_TARGET.
 #
 # LIBRARIES
-#   Extra libraries with which to link this target.
+#   Extra libraries to link to the resulting target.
 #
 # OPTIONAL_GROUPS
 #   Assign this test to one or more named optional groups. If the CMake
-#    list variable CET_TEST_GROUPS is set (e.g. with -D on the CMake
-#    command line) and there is overlap between the two lists, execute
-#    the test. The CET_TEST_GROUPS cache variable may additionally
-#    contain the optional values ALL or NONE.
+#   list variable CET_TEST_GROUPS is set (e.g. with -D on the CMake
+#   command line) and there is overlap between the two lists, execute
+#   the test. The CET_TEST_GROUPS cache variable may additionally
+#   contain the optional values ALL or NONE.
 #
 # REF
 #  The standard output of the test will be captured and compared against
@@ -91,9 +90,18 @@
 #   representing a reference for the error stream; otherwise, standard
 #   error will be ignored.
 #
-#  If REF is specified, then OUTPUT_FILTER and OUTPUT_FILTER_ARGS may
-#   also be specified. OUTPUT_FILTER must be a program which expects an
-#   input filename as argument and puts the filtered output on STDOUT.
+#  If REF is specified, then OUTPUT_FILTERS may also be specified
+#   (OUTPUT_FILTER and optionally OUTPUT_FILTER_ARGS will be accepted in
+#   the alternative for historical reasons). OUTPUT_FILTER must be a
+#   program which expects input on STDIN and puts the filtered output on
+#   STDOUT. OUTPUT_FILTERS should be a list of filters expecting input
+#   on STDIN and putting output on STDOUT. If DEFAULT is specified as a
+#   filter, it will be replaced at that point in the list of filters by
+#   appropriate defaults. Examples:
+#
+#     OUTPUT_FILTERS "filterA -x -y \"arg with spaces\"" filterB
+#
+#     OUTPUT_FILTERS filterA DEFAULT filterB
 #
 # REQUIRED_FILES
 #   These files are required to be present before the test will be
@@ -108,25 +116,25 @@
 #
 # TEST_EXEC
 #   The exec to run (if not the target). The HANDBUILT option must
-#    be specified in conjunction with this option.
+#   be specified in conjunction with this option.
 #
 # TEST_PROPERTIES
 #   Properties to be added to the test. See documentation of the cmake
-#    command, "set_tests_properties."
+#   command, "set_tests_properties."
 #
 # Cache variables
 #
 # CET_TEST_GROUPS
 #   Test group names specified using the OPTIONAL_GROUPS list option are
-#    compared against this list to determine whether to configure the
-#    test. Default value is the special value "NONE," meaning no
-#    optional tests are to be configured. Optionally CET_TEST_GROUPS may
-#    contain the special value "ALL." Specify multiple values separated
-#    by ";" (escape or protect with quotes) or "," See explanation of
-#    the OPTIONAL_GROUPS variable above for more details.
+#   compared against this list to determine whether to configure the
+#   test. Default value is the special value "NONE," meaning no
+#   optional tests are to be configured. Optionally CET_TEST_GROUPS may
+#   contain the special value "ALL." Specify multiple values separated
+#   by ";" (escape or protect with quotes) or "," See explanation of
+#   the OPTIONAL_GROUPS variable above for more details.
 #
 # CET_DEFINED_TEST_GROUPS
-#  Any test group names CMake sees will be added to this list.
+#   Any test group names CMake sees will be added to this list.
 #
 # Notes
 #
@@ -156,7 +164,7 @@
 #
 # CLEAR
 #   Clear the global test environment (ie anything previously set with
-#    cet_test_env()) before setting <env>.
+#   cet_test_env()) before setting <env>.
 #
 # Notes:
 #
@@ -309,9 +317,13 @@ function(cet_test CET_TARGET)
   cmake_parse_arguments(CET
     "HANDBUILT;PREBUILT;NO_AUTO;USE_BOOST_UNIT;INSTALL_BIN;INSTALL_EXAMPLE;INSTALL_SOURCE"
     "OUTPUT_FILTER;TEST_EXEC"
-    "CONFIGURATIONS;DATAFILES;DEPENDENCIES;LIBRARIES;OPTIONAL_GROUPS;OUTPUT_FILTER_ARGS;REQUIRED_FILES;SOURCES;TEST_ARGS;TEST_PROPERTIES;REF"
+    "CONFIGURATIONS;DATAFILES;DEPENDENCIES;LIBRARIES;OPTIONAL_GROUPS;OUTPUT_FILTERS;OUTPUT_FILTER_ARGS;REQUIRED_FILES;SOURCES;TEST_ARGS;TEST_PROPERTIES;REF"
     ${ARGN}
     )
+
+  if(CET_OUTPUT_FILTERS AND CET_OUTPUT_FILTER_ARGS)
+    message(FATAL_ERROR "OUTPUT_FILTERS is incompatible with FILTER_ARGS:\nEither use the singular OUTPUT_FILTER or use double-quoted strings in OUTPUT_FILTERS\nE.g. OUTPUT_FILTERS \"filter1 -x -y\" \"filter2 -y -z\"")
+  endif()
 
   # Set up to handle a per-test work directory for parallel testing.
   set(CET_TEST_WORKDIR "${CMAKE_CURRENT_BINARY_DIR}/${CET_TARGET}.d")
@@ -340,7 +352,7 @@ function(cet_test CET_TARGET)
       get_filename_component(dfd ${df} DIRECTORY)
       if(dfd)
         list(APPEND datafiles_tmp ${df})
-      else(dfd)
+      else()
         list(APPEND datafiles_tmp ${CMAKE_CURRENT_SOURCE_DIR}/${df})
       endif()
     endforeach()
@@ -408,7 +420,7 @@ function(cet_test CET_TARGET)
         endif()
       endforeach()
 
-      target_link_libraries(${CET_TARGET} ${link_lib_list})
+      target_link_libraries(${CET_TARGET} PRIVATE ${link_lib_list})
     endif()
   endif()
 
@@ -448,19 +460,21 @@ function(cet_test CET_TARGET)
       else()
         list(GET CET_REF 0 OUTPUT_REF)
         list(GET CET_REF 1 ERROR_REF)
-        set(DEF_ERROR_REF "-DTEST_REF_ERR=${ERROR_REF}")
-        set(DEF_TEST_ERR "-DTEST_ERR=${CET_TARGET}.err")
+        set(DEFINE_ERROR_REF "-DTEST_REF_ERR=${ERROR_REF}")
+        set(DEFINE_TEST_ERR "-DTEST_ERR=${CET_TARGET}.err")
       endif()
 
       separate_arguments(TEST_ARGS UNIX_COMMAND "${CET_TEST_ARGS}")
 
       if(CET_OUTPUT_FILTER)
-        set(DEF_OUTPUT_FILTER "-DOUTPUT_FILTER=${CET_OUTPUT_FILTER}")
-      endif()
-
-      if(CET_OUTPUT_FILTER_ARGS)
-        separate_arguments(FILTER_ARGS UNIX_COMMAND "${CET_OUTPUT_FILTER_ARGS}")
-        set(DEF_OUTPUT_FILTER_ARGS "-DOUTPUT_FILTER_ARGS=${FILTER_ARGS}")
+        set(DEFINE_OUTPUT_FILTER "-DOUTPUT_FILTER=${CET_OUTPUT_FILTER}")
+        if(CET_OUTPUT_FILTER_ARGS)
+          separate_arguments(FILTER_ARGS UNIX_COMMAND "${CET_OUTPUT_FILTER_ARGS}")
+          set(DEFINE_OUTPUT_FILTER_ARGS "-DOUTPUT_FILTER_ARGS=${FILTER_ARGS}")
+        endif()
+      elseif(CET_OUTPUT_FILTERS)
+        string(REPLACE ";" "::" DEFINE_OUTPUT_FILTERS "${CET_OUTPUT_FILTERS}")
+        set(DEFINE_OUTPUT_FILTERS "-DOUTPUT_FILTERS=${DEFINE_OUTPUT_FILTERS}")
       endif()
 
       #if(DEFINED ENV{CETBUILDTOOLS_DIR})
@@ -482,10 +496,10 @@ function(cet_test CET_TARGET)
         -DTEST_EXEC=${CET_TEST_EXEC}
         -DTEST_ARGS=${TEST_ARGS}
         -DTEST_REF=${OUTPUT_REF}
-        ${DEF_ERROR_REF}
-        ${DEF_TEST_ERR}
+        ${DEFINE_ERROR_REF}
+        ${DEFINE_TEST_ERR}
         -DTEST_OUT=${CET_TARGET}.out
-        ${DEF_OUTPUT_FILTER} ${DEF_OUTPUT_FILTER_ARGS}
+        ${DEFINE_OUTPUT_FILTER} ${DEFINE_OUTPUT_FILTER_ARGS} ${DEFINE_OUTPUT_FILTERS}
         -P ${COMPARE}
         )
     else()

@@ -114,6 +114,34 @@ add_test(
           --build-options "-Dcetbuildtools2_MODULE_PATH=${PROJECT_SOURCE_DIR}/Modules"
   )
 
+#-----------------------------------------------------------------------
+# BasicPlugin test
+#
+add_test(
+  NAME testCetBasicPlugin
+  COMMAND ${CMAKE_CTEST_COMMAND}
+          --build-and-test ${CMAKE_CURRENT_LIST_DIR}/testCetBasicPlugin ${CMAKE_CURRENT_BINARY_DIR}/testCetBasicPlugin
+          --build-generator ${CMAKE_GENERATOR}
+          --build-makeprogram ${CMAKE_MAKE_PROGRAM}
+          --build-config $<CONFIG>
+          --build-options "-Dcetbuildtools2_MODULE_PATH=${PROJECT_SOURCE_DIR}/Modules"
+  )
+
+#-----------------------------------------------------------------------
+# FindCppUnit test
+#
+add_test(
+  NAME testFindCppUnit
+  COMMAND ${CMAKE_CTEST_COMMAND}
+          --build-and-test ${CMAKE_CURRENT_LIST_DIR}/testFindCppUnit ${CMAKE_CURRENT_BINARY_DIR}/testFindCppUnit
+          --build-generator ${CMAKE_GENERATOR}
+          --build-makeprogram ${CMAKE_MAKE_PROGRAM}
+          --build-config $<CONFIG>
+          --build-options "-Dcetbuildtools2_MODULE_PATH=${PROJECT_SOURCE_DIR}/Modules"
+  )
+
+
+
 
 
 
